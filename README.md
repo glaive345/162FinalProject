@@ -1,6 +1,6 @@
 # 162FinalProject
 ## General Notes/Problems ##
-
+Created on Unity 2019.1.3f1
 ## Visuals/UI ##
 ### Derek ###
 -Player asset done<br/>
@@ -9,7 +9,7 @@
 -numbers on screen for UI<br/>
 
 ### Documentation ###
--WRITE HERE
+-WRITE DOCUMENTATION HERE
 ## Game Logic ##
 ### Jason ###
 -Classes<br/>
@@ -17,7 +17,7 @@
 -Event generation<br/>
 
 ### Documentation ###
--WRITE HERE
+-WRITE DOCUMENTATION HERE
 ## Movement ##
 ### Aaron ###
 -Movement in four directions<br/>
@@ -26,12 +26,22 @@
 -make a minigame (trgeter minigame)<br/>
 
 ### Documentation ###
--WRITE HERE
+-WRITE DOCUMENTATION HERE
 ## Input ##
 ### Yang ###
 -Binding keys to command pattern (for 2 players)<br/>
 -Creating first basic minigame (virus minigame)<br/>
 
-
 ### Documentation ###
--WRITE HERE
+-WRITE DOCUMENTATION HERE
+
+## Audio ##
+-WRITE DOCUMENTATION HERE
+## Gameplay Testing ##
+-WRITE DOCUMENTATION HERE
+## Narrative Design ##
+-WRITE DOCUMENTATION HERE
+## Press Kit and Trailer ##
+-WRITE DOCUMENTATION HERE
+## Game Feel ##
+-WRITE DOCUMENTATION HERE
