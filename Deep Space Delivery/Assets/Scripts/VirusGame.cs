@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VirusGame : MonoBehaviour
+public class VirusGame : MonoBehaviour, IMinigame
 {
     [SerializeField] private GameObject warningWindow0;
     [SerializeField] private GameObject warningWindow1;
@@ -106,7 +106,7 @@ public class VirusGame : MonoBehaviour
         if (this.playerInPlayZone && this.gameInitialized && this.remainingWindows > 0)
         {
             this.remainingWindows--;
-            Debug.Log("closing: " + this.remainingWindows);
+            // Debug.Log("closing: " + this.remainingWindows);
             warningWindows[this.remainingWindows].SetActive(false);
         }
     }

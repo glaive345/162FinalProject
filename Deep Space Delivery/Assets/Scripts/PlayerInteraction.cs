@@ -6,6 +6,6 @@ public class PlayerInteraction : ScriptableObject, IPlayerCommand
 {
     public void Execute(GameObject game)
     {
-        game.GetComponent<VirusGame>().Interaction();
+        game.GetComponent<IMinigame>().Interaction();
     }
 }
