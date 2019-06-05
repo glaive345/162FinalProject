@@ -1,6 +1,17 @@
 # 162FinalProject
 ## General Notes/Problems ##
-Created on Unity 2019.1.3f1
+Created on Unity 2019.1.3f1<br/>
+
+Each minigame should hold: <br/>
+-Whether it is currently active (bool) <br/>
+-Whether it can be interacted with (bool)<br/>
+
+Parameters required from each minigame: <br/>
+-Name of minigame + start/ongoing(only for some)/end (string) <br/>
+-Success/Failure (bool)<br/>
+-Degree of success (float 0 to 1)<br/>
+-End state of station (string)<br/>
+
 ## Visuals/UI (Derek) ##
 -Player asset done<br/>
 -basic ship outline<br/>
