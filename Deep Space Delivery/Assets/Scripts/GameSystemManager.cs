@@ -6,7 +6,7 @@ public class GameSystemManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Time time = 0;
+        int time = 0;
         int failureCounter = 0;
         RepairObjects repairStuff1;
         RepairObjects repairStuff2;

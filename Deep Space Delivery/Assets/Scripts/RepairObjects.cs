@@ -12,13 +12,13 @@ public class RepairObjects : MonoBehaviour
     }
     void Start()
     {
-        Time timer = 0;
+        int timer = 0;
         Status status = Status.Inactive;
     }
 
     // Update is called once per frame
     void Update()
     {
-        i 
+        
     }
 }
