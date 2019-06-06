@@ -8,12 +8,10 @@ public class DoorPressurePlate : MonoBehaviour
     [SerializeField] GameObject Door2;
 
     private int StandingCount;
-    private BoxCollider PlateCollider;
     private float Timer;
     // Start is called before the first frame update
     void Start()
     {
-        PlateCollider = this.gameObject.GetComponent<BoxCollider>();
         Timer = 0.0f;
         StandingCount = 0;
     }

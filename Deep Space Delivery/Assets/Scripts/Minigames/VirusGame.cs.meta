@@ -1,0 +1,35 @@
+fileFormatVersion: 2
+guid: 4f6bed20d684d474599aacdeae821854
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - warningWindow0: {fileID: 4426033181011605606, guid: 58b4474811ab84db681b519cdf7bbdcf,
+      type: 3}
+  - warningWindow1: {fileID: 4426033181011605606, guid: 58b4474811ab84db681b519cdf7bbdcf,
+      type: 3}
+  - warningWindow2: {fileID: 4426033181011605606, guid: 58b4474811ab84db681b519cdf7bbdcf,
+      type: 3}
+  - warningWindow3: {fileID: 4426033181011605606, guid: 58b4474811ab84db681b519cdf7bbdcf,
+      type: 3}
+  - warningWindow4: {instanceID: 0}
+  - warningWindow5: {instanceID: 0}
+  - warningWindow6: {instanceID: 0}
+  - warningWindow7: {instanceID: 0}
+  - warningWindow8: {instanceID: 0}
+  - warningWindow9: {instanceID: 0}
+  - warningWindow10: {instanceID: 0}
+  - warningWindow11: {instanceID: 0}
+  - warningWindow12: {instanceID: 0}
+  - warningWindow13: {instanceID: 0}
+  - warningWindow14: {instanceID: 0}
+  - warningWindow15: {instanceID: 0}
+  - warningWindow16: {instanceID: 0}
+  - warningWindow17: {instanceID: 0}
+  - warningWindow18: {instanceID: 0}
+  - warningWindow19: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
