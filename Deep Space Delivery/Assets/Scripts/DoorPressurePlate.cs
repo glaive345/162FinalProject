@@ -7,6 +7,7 @@ public class DoorPressurePlate : MonoBehaviour
     [SerializeField] GameObject Door1;
     [SerializeField] GameObject Door2;
 
+    private int StandingCount;
     private BoxCollider PlateCollider;
     private float Timer;
     // Start is called before the first frame update
@@ -14,6 +15,7 @@ public class DoorPressurePlate : MonoBehaviour
     {
         PlateCollider = this.gameObject.GetComponent<BoxCollider>();
         Timer = 0.0f;
+        StandingCount = 0;
     }
 
 
@@ -24,7 +26,7 @@ public class DoorPressurePlate : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(Timer < 1.0f)
+        if(Timer < 1.0f && StandingCount == 0)
         {
             Door1.GetComponent<Animation>()["open"].time = 1 - Timer;
             Door1.GetComponent<Animation>().Play("open");
@@ -32,17 +34,18 @@ public class DoorPressurePlate : MonoBehaviour
             Door2.GetComponent<Animation>().Play("open");
             Timer = 1 - Timer;
         }
-        else
+        else if(StandingCount == 0)
         {
             Door1.GetComponent<Animation>().Play("open");
             Door2.GetComponent<Animation>().Play("open");
             Timer = 0.0f;
         }
+        StandingCount += 1;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if(Timer < 1.0f)
+        if(Timer < 1.0f && StandingCount == 1)
         {
             Door1.GetComponent<Animation>()["close"].time = 1 - Timer;
             Door1.GetComponent<Animation>().Play("close");
@@ -50,11 +53,12 @@ public class DoorPressurePlate : MonoBehaviour
             Door2.GetComponent<Animation>().Play("close");
             Timer = 1 - Timer;
         }
-        else
+        else if(StandingCount == 1)
         {
             Door1.GetComponent<Animation>().Play("close");
             Door2.GetComponent<Animation>().Play("close");
             Timer = 0.0f;
         }
+        StandingCount -= 1;
     }
 }

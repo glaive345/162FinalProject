@@ -9,6 +9,7 @@ public class P2Controller : MonoBehaviour
     private IPlayerCommand up;
     private IPlayerCommand down;
     private IPlayerCommand utility;
+    private IPlayerCommand idle;
     private bool playerInPlayzone;
     private GameObject interactingGame;
 
@@ -23,6 +24,7 @@ public class P2Controller : MonoBehaviour
         this.right = ScriptableObject.CreateInstance<MovePlayerRight>();
         this.left = ScriptableObject.CreateInstance<MovePlayerLeft>();
         this.utility = ScriptableObject.CreateInstance<PlayerInteraction>();
+        this.idle = ScriptableObject.CreateInstance<PlayerIdle>();
     }
 
     void Update()
@@ -33,21 +35,21 @@ public class P2Controller : MonoBehaviour
             this.utility.Execute(this.interactingGame);
         }
 
-        if (Input.GetAxis("Horizontal2") > 0.01)
+        if (Input.GetAxis("Horizontal2") == 0 && Input.GetAxis("Vertical2") == 0)
         {
-            this.right.Execute(this.gameObject);
+            this.gameObject.GetComponent<Animator>().speed = 1;
+            this.idle.Execute(this.gameObject);
         }
-        else if (Input.GetAxis("Horizontal2") < -0.01)
+        else
         {
-            this.left.Execute(this.gameObject);
-        }
-        else if (Input.GetAxis("Vertical2") > 0.01)
-        {
-            this.up.Execute(this.gameObject);
-        }
-        else if (Input.GetAxis("Vertical2") < -0.01)
-        {
-            this.down.Execute(this.gameObject);
+            var directionX = Input.GetAxis("Horizontal2");
+            var directionY = -Input.GetAxis("Vertical2");
+
+            var degree = UnityEngine.Mathf.Rad2Deg * UnityEngine.Mathf.Atan2(directionY, directionX);
+            var speed = Mathf.Sqrt(directionX * directionX + directionY * directionY);
+            this.gameObject.transform.rotation = Quaternion.Euler(degree, 90, 270);
+            this.gameObject.GetComponent<Animator>().speed = speed;
+            this.gameObject.GetComponent<Animator>().Play("HumanoidRun");
         }
     }
 

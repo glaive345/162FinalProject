@@ -120,7 +120,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
-
 --- !u!4 &22210690 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: f51019e14fbd3b94f92da5ad5854be0f,
@@ -31975,6 +31974,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
+--- !u!114 &2062510020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2062510015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5baa89ada3b684b1395c6cf8ce107306, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2094197719 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: f51019e14fbd3b94f92da5ad5854be0f,
@@ -32146,6 +32157,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 557271314}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2109387058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2109387057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 372777d7ec00c4817921271a801b2d88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!65 &2109387060
 BoxCollider:
   m_ObjectHideFlags: 0

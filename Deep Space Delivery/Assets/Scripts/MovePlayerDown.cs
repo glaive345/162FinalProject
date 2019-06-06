@@ -6,6 +6,7 @@ public class MovePlayerDown : ScriptableObject, IPlayerCommand
 {
     public void Execute(GameObject player)
     {
-        player.transform.Translate(0, -0.05f, 0);
+        player.transform.rotation = Quaternion.Euler(Input.GetAxis("Vertical1") * 90, 90, 270);
+        player.GetComponent<Animator>().Play("HumanoidRun");
     }
 }
