@@ -6,27 +6,15 @@ public class P2Controller : MonoBehaviour
 {
     private IPlayerCommand utility;
     private IPlayerCommand idle;
-    private bool playerInPlayzone;
-    private GameObject interactingGame;
 
 
     void Start()
     {
-        // true for now
-        this.playerInPlayzone = false;
-
-        this.utility = ScriptableObject.CreateInstance<PlayerInteraction>();
         this.idle = ScriptableObject.CreateInstance<PlayerIdle>();
     }
 
     void Update()
     {
-        this.playzoneDetection();
-        if (this.playerInPlayzone && Input.GetButtonDown("Utility2"))
-        {
-            this.utility.Execute(this.interactingGame);
-        }
-
         if (Input.GetAxis("Horizontal2") == 0 && Input.GetAxis("Vertical2") == 0)
         {
             this.gameObject.GetComponent<Animator>().speed = 1;
@@ -43,25 +31,5 @@ public class P2Controller : MonoBehaviour
             this.gameObject.GetComponent<Animator>().speed = speed;
             this.gameObject.GetComponent<Animator>().Play("HumanoidRun");
         }
-    }
-
-    private void playzoneDetection()
-    {
-
-        if (!this.playerInPlayzone)
-        {
-            // if (in some playzone)
-            // {
-            this.playerInPlayzone = true;
-            // playzone's corresponding gameobject
-            this.interactingGame = GameObject.Find("Virus Game");
-            // }
-        }
-
-        // else
-        // {
-        //     this.playerInPlayzone = false;
-        //     this.interactingGame = null;
-        // }
     }
 }
