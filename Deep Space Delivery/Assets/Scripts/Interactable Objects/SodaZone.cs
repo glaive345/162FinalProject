@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SodaZone : MonoBehaviour
 {
@@ -13,9 +14,16 @@ public class SodaZone : MonoBehaviour
 
     [SerializeField] private float speedBoostMultiplier;
     [SerializeField] private float stepSpeed;
+    [SerializeField] private float shakeThreshold;
+    [SerializeField] private float shakeSpeedMultiplier;
+
+    [SerializeField] private Text cansDrunkText;
+
+    private float shakeAmount;
     private float cansDrunk;
 
     private GameObject track;
+    private GameObject sodaCan;
 
     void Start()
     {
@@ -25,7 +33,8 @@ public class SodaZone : MonoBehaviour
         //PREINITIALIZE VARIABLES HERE
         cansDrunk = 0;
 
-        track = this.displayPanel.transform.GetChild(0).gameObject;
+        track = this.displayPanel.transform.GetChild(1).gameObject;
+        sodaCan = this.displayPanel.transform.GetChild(2).gameObject;
 
         this.displayPanel.SetActive(false);
     }
@@ -34,7 +43,8 @@ public class SodaZone : MonoBehaviour
     {
         if (gameActivated)
         {
-
+            sodaCan.transform.Rotate(new Vector3(0, 25, 10));
+            track.transform.localScale = new Vector3(track.transform.localScale.x, track.transform.localScale.y + shakeSpeedMultiplier * Time.deltaTime, track.transform.localScale.z);
         }
         //If player1 or player 2 interacts
         if ((other.gameObject.name == "Player1" && Input.GetButtonDown("Utility1")) || (other.gameObject.name == "Player2" && Input.GetButtonDown("Utility2")))
@@ -67,6 +77,9 @@ public class SodaZone : MonoBehaviour
                 //Playing Game
                 //ADD ON-INTERACT EFFECT HERE
                 cansDrunk++;
+                cansDrunkText.text = "Cans Drunk: " + cansDrunk;
+
+                track.transform.localScale = new Vector3(track.transform.localScale.x, 0, track.transform.localScale.z);
 
 
                 //NEED TO SEND RESULTS TO SUBSCRIBERS
@@ -81,6 +94,7 @@ public class SodaZone : MonoBehaviour
         {
             //Closing Game
             //RESET VARIABLES HERE
+            track.transform.localScale = new Vector3(track.transform.localScale.x, 0, track.transform.localScale.z);
 
 
 
