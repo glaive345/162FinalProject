@@ -2,55 +2,92 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class BridgeZone : MonoBehaviour
 {
     [SerializeField] private GameObject displayPanel;
     private List<GameObject> warningWindows = new List<GameObject>();
 
     [SerializeField] private GameObject congratulations;
+    [SerializeField] private GameObject warningWindowPrefab;
 
     private bool gameActivated;
     private string currentPlayer;
-
-    private int remainingWindows;
-
+    // current number of window being displayed
+    private int systemHealth;
+    private float throttle;
 
     // Start is called before the first frame update
     void Start()
     {
         this.gameActivated = false;
         this.currentPlayer = "None";
-        this.remainingWindows = 0;
+        this.systemHealth = 100;
+        this.throttle = Random.Range(0.0f, 10.0f);
 
-        for(int i = 0; i < 20; i++)
+        // for(int i = 0; i < 20; i++)
+        // {
+        //     this.warningWindows.Add(this.displayPanel.transform.GetChild(i).gameObject);
+        // }
+
+        // this.displayPanel.SetActive(false);
+        // this.warningWindows.ForEach(delegate (GameObject obj)
+        // {
+        //     obj.SetActive(false);
+        // });
+
+        // this.congratulations.SetActive(false);
+    }
+
+    void Update()
+    {
+        this.throttle -= Time.deltaTime;
+        if (this.throttle <= 0)
         {
-            this.warningWindows.Add(this.displayPanel.transform.GetChild(i).gameObject);
+            var randDamage = Random.Range(1, 5);
+            if (this.gameActivated)
+            {
+                for (var i = 0; i < randDamage; i++)
+                {
+                    this.createWindow();
+                }
+            }
+            this.systemHealth -= randDamage;
+            this.throttle = Random.Range(0.0f, 10.0f);
         }
-
-        this.displayPanel.SetActive(false);
-        this.warningWindows.ForEach(delegate (GameObject obj)
+        if (this.systemHealth != 100)
         {
-            obj.SetActive(false);
-        });
+            Debug.Log(this.systemHealth);
+        }
+    }
 
-        this.congratulations.SetActive(false);
+    private void createWindow()
+    {
+        GameObject tempWindow = Instantiate(
+            warningWindowPrefab, this.displayPanel.transform.position, Quaternion.identity);
+        tempWindow.GetComponent<RectTransform>().sizeDelta = new Vector2(175.34f, 56.91f);
+        tempWindow.transform.SetParent(this.displayPanel.transform);
+        tempWindow.GetComponent<RectTransform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        tempWindow.transform.localPosition = new Vector3(
+            Random.Range(-58.0f, 58.0f), Random.Range(-100.0f, 100.0f), 0);
     }
 
 
     private void OnTriggerStay(Collider other)
     {
         //If player1 or player 2 interacts
-        if((other.gameObject.name == "Player1" && Input.GetButtonDown("Utility1")) || (other.gameObject.name == "Player2" && Input.GetButtonDown("Utility2")))
+        if ((other.gameObject.name == "Player1" && Input.GetButtonDown("Utility1"))
+            || (other.gameObject.name == "Player2" && Input.GetButtonDown("Utility2")))
         {
-            if(gameActivated == false)
+            if (!this.gameActivated)
             {
-                //Initializing Game
+                // activating Game
                 this.displayPanel.SetActive(true);
-                this.warningWindows.ForEach(delegate (GameObject obj)
+                for (var i = 0; i < 100 - this.systemHealth; i++)
                 {
-                    obj.SetActive(true);
-                });
-                this.remainingWindows = 20;
+                    this.createWindow();
+                    Debug.Log("creating window");
+                }
 
                 //Setting Starting Player
                 this.gameActivated = true;
@@ -66,24 +103,34 @@ public class BridgeZone : MonoBehaviour
                     this.displayPanel.transform.localPosition = new Vector3(-734.5284f, 0, 0);
                 }
             }
-            //Progresses game if player who initiated it interacts
-            else if(currentPlayer == other.gameObject.name)
+
+            else if (this.systemHealth < 100)
             {
-                //Playing Game
-                if(remainingWindows > 0)
-                {
-                    //Removes one window
-                    this.remainingWindows--;
-                    warningWindows[this.remainingWindows].SetActive(false);
-                }
-                else
-                {
-                    //Game Completed
-                    this.congratulations.SetActive(true);
-                    
-                    //NEED TO SEND RESULTS TO SUBSCRIBERS
-                }
+
+                var lastChild = this.displayPanel.transform.GetChild(this.displayPanel.transform.childCount - 1);
+                Debug.Log(lastChild);
+                Destroy(lastChild.gameObject);
+                this.systemHealth++;
             }
+
+            //Progresses game if player who initiated it interacts
+            // else if(currentPlayer == other.gameObject.name)
+            // {
+            //     //Playing Game
+            //     if(remainingWindows > 0)
+            //     {
+            //         //Removes one window
+            //         this.remainingWindows--;
+            //         warningWindows[this.remainingWindows].SetActive(false);
+            //     }
+            //     else
+            //     {
+            //         //Game Completed
+            //         this.congratulations.SetActive(true);
+
+            //         //NEED TO SEND RESULTS TO SUBSCRIBERS
+            //     }
+            // }
         }
     }
 
@@ -97,11 +144,11 @@ public class BridgeZone : MonoBehaviour
             Debug.Log("game deactivated");
 
             this.displayPanel.SetActive(false);
-            this.warningWindows.ForEach(delegate (GameObject obj)
-            {
-                obj.SetActive(false);
-            });
-            this.remainingWindows = 0;
+            // this.warningWindows.ForEach(delegate (GameObject obj)
+            // {
+            //     obj.SetActive(false);
+            // });
+            // this.remainingWindows = 0;
             currentPlayer = "None";
 
             this.congratulations.SetActive(false);
