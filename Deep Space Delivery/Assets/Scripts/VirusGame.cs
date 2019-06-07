@@ -24,6 +24,8 @@ public class VirusGame : MonoBehaviour, IMinigame
     [SerializeField] private GameObject warningWindow17;
     [SerializeField] private GameObject warningWindow18;
     [SerializeField] private GameObject warningWindow19;
+    [SerializeField] private GameObject displayPanel;
+
     private List<GameObject> warningWindows = new List<GameObject>();
     private bool playerInPlayZone;
     // whether the game can be played
@@ -31,9 +33,8 @@ public class VirusGame : MonoBehaviour, IMinigame
     private bool gameInitialized;
     // number of unclosed windows after time up
     private int remainingWindows;
-    private GameObject displayPanel;
 
-    public int key = 11;
+    // public int key = 11;
 
     void Start()
     {
@@ -44,7 +45,6 @@ public class VirusGame : MonoBehaviour, IMinigame
 
         this.remainingWindows = 0;
         this.gameInitialized = false;
-        this.displayPanel = this.transform.GetChild(0).gameObject;
 
         this.warningWindows.Add(this.warningWindow0);
         this.warningWindows.Add(this.warningWindow1);
