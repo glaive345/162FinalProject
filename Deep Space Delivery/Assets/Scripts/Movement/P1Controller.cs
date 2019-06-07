@@ -5,14 +5,10 @@ using UnityEngine;
 public class P1Controller : MonoBehaviour
 {
     private IPlayerCommand idle;
-    private bool playerInPlayzone;
-    private GameObject interactingGame;
 
 
     void Start()
     {
-        // true for now
-        this.playerInPlayzone = false;
         this.idle = ScriptableObject.CreateInstance<PlayerIdle>();
     }
 
