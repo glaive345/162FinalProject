@@ -10,15 +10,17 @@ public class ShieldZone : MonoBehaviour
     private string currentPlayer;
 
     //ADD OTHER VARIABLES HERE
-    [SerializeField] private float lowChargePercent;
-    [SerializeField] private float highChargePercent;
+    [SerializeField] private float lowChargeMaximum;
+    [SerializeField] private float highChargeMaximum;
 
     [SerializeField] private float spinSpeed;
     [SerializeField] private float chargeRateMulitplier;
     [SerializeField] private float decayRateMultiplier;
 
-    private float currentCharge;
     private bool beginDecay;
+
+    private GameObject rotateBar;
+    private GameObject chargeBar;
 
     void Start()
     {
@@ -26,8 +28,10 @@ public class ShieldZone : MonoBehaviour
         this.currentPlayer = "None";
 
         //PREINITIALIZE VARIABLES HERE
-        this.currentCharge = 0;
-        beginDecay = false;
+        this.beginDecay = false;
+
+        this.rotateBar = this.displayPanel.transform.GetChild(3).gameObject;
+        this.chargeBar = this.displayPanel.transform.GetChild(5).gameObject;
 
 
         this.displayPanel.SetActive(false);
@@ -36,14 +40,10 @@ public class ShieldZone : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        var bar = this.displayPanel.transform.GetChild(3);
-
         if (gameActivated == true)
         {
-            bar.transform.RotateAround(this.displayPanel.transform.position, new Vector3(0f, -0.43f, -1f), spinSpeed);
+            rotateBar.transform.RotateAround(this.displayPanel.transform.position, new Vector3(0f, -0.43f, -1f), spinSpeed);
         }
-
-        var chargeBar = this.displayPanel.transform.GetChild(5);
 
         //If player1 or player 2 interacts
         if ((other.gameObject.name == "Player1" && Input.GetButton("Utility1")) || (other.gameObject.name == "Player2" && Input.GetButton("Utility2")))
@@ -92,15 +92,17 @@ public class ShieldZone : MonoBehaviour
                         beginDecay = false;
                     }
                 }
-
-                //NEED TO SEND RESULTS TO SUBSCRIBERS
             }
         }
         else
         {
             //Lose charge or input charge
             beginDecay = false;
+            var savedCharge = chargeBar.transform.localScale.y / 150;
             chargeBar.transform.localScale = new Vector3(chargeBar.transform.localScale.x, 0, chargeBar.transform.localScale.z);
+
+            //NEED TO CHECK FOR LARGE CHARGE ON OVERLAP
+            //SEND TO SUBSCRIBERS RESULT
         }
     }
 
@@ -111,7 +113,8 @@ public class ShieldZone : MonoBehaviour
         {
             //Closing Game
             //RESET VARIABLES HERE
-
+            chargeBar.transform.localScale = new Vector3(chargeBar.transform.localScale.x, 0, chargeBar.transform.localScale.z);
+            beginDecay = false;
 
 
             this.gameActivated = false;
