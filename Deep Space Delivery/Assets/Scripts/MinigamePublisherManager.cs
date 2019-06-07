@@ -1,6 +1,6 @@
 ﻿using System;
 using UnityEngine;
-using DeepSpace
+using DeepSpace;
 // change name to Publisher Manager
 public class MinigamePublisherManager : MonoBehaviour
 {
@@ -37,7 +37,7 @@ public class MinigamePublisherManager : MonoBehaviour
 
         }
     }
-    public void Register(int group, bool callback)
+    public void Register(int group, System.Action<bool> callback)
     {
         switch (group)
         {
@@ -58,7 +58,7 @@ public class MinigamePublisherManager : MonoBehaviour
                 break;
         }
     }
-    public void Unregister(int group, bool callback)
+    public void Unregister(int group, System.Action<bool> callback)
     {
         switch (group)
         {
