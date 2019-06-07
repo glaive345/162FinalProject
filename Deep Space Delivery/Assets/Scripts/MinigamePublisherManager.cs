@@ -10,7 +10,7 @@ public class MinigamePublisherManager : MonoBehaviour
     private IPublisher MiniGame2Publisher = new Publisher();
     private IPublisher Minigame3Publisher = new Publisher();
     private IPublisher MiniGame4Publisher = new Publisher();
-    private IPublisher MiniGame5Publisher = new Publisher();
+    private IPublisher Minigame5Publisher = new Publisher();
 
 
 
@@ -37,33 +37,45 @@ public class MinigamePublisherManager : MonoBehaviour
 
         }
     }
-    public void Register(int group, Action<Vector3> callback)
+    public void Register(int group, bool callback)
     {
         switch (group)
         {
             case 1:
-                Group1Publisher.Register(callback);
+                MiniGame1Publisher.Register(callback);
                 break;
             case 2:
-                Group2Publisher.Register(callback);
+                MiniGame2Publisher.Register(callback);
                 break;
             case 3:
-                Group3Publisher.Register(callback);
+                Minigame3Publisher.Register(callback);
+                break;
+            case 4:
+                MiniGame4Publisher.Register(callback);
+                break;
+            case 5:
+                Minigame5Publisher.Register(callback);
                 break;
         }
     }
-    public void Unregister(int group, Action<Vector3> callback)
+    public void Unregister(int group, bool callback)
     {
         switch (group)
         {
             case 1:
-                Group1Publisher.Unregister(callback);
+                MiniGame1Publisher.Unregister(callback);
                 break;
             case 2:
-                Group2Publisher.Unregister(callback);
+                MiniGame2Publisher.Unregister(callback);
                 break;
             case 3:
-                Group3Publisher.Unregister(callback);
+                Minigame3Publisher.Unregister(callback);
+                break;
+            case 4:
+                MiniGame4Publisher.Unregister(callback);
+                break;
+            case 5:
+                Minigame5Publisher.Unregister(callback);
                 break;
         }
     }
