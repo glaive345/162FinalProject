@@ -49,7 +49,6 @@ public class CarryZone : MonoBehaviour
         timer = 0;
 
         this.displayPanel.SetActive(false);
-        this.spilledText.SetActive(false);
     }
 
     private void Update()
@@ -63,8 +62,16 @@ public class CarryZone : MonoBehaviour
                 //On first frame of spill
                 if(spillSustainTimer == 0)
                 {
-                    spilledText.SetActive(true);
-                    //DO SPILL ANIMATION
+                    spilledText.GetComponent<UnityEngine.UI.Text>().text = "Spilled";
+                    //Immediately remove barrel, preventing drop off
+                    if (currentPlayer == "Player1")
+                    {
+                        carryBarrel1.SetActive(false);
+                    }
+                    else if(currentPlayer == "Player2")
+                    {
+                        carryBarrel2.SetActive(false);
+                    }
                 }
                 spillSustainTimer += Time.deltaTime;
                 if(spillSustainTimer >= spillTime)
@@ -74,6 +81,8 @@ public class CarryZone : MonoBehaviour
             }
             else
             {
+                //spilledText doubles as a timer while not spilled
+                spilledText.GetComponent<UnityEngine.UI.Text>().text = (respawnTime - timer).ToString();
                 //Rotates barrel towards direction it is closest to falling down towards
                 if (barrel.transform.localRotation.z > 0)
                 {
@@ -105,7 +114,6 @@ public class CarryZone : MonoBehaviour
                 }
 
                 //If barrel tilts beyond threshold
-                Debug.Log(barrel.transform.rotation.z);
                 if (Mathf.Abs(barrel.transform.localRotation.z) > tippingThreshold)
                 {
                     spill = true;
@@ -126,7 +134,16 @@ public class CarryZone : MonoBehaviour
                 }
             }
         }
-        
+
+        //Checks if barrel has been dropped off
+        if (!spill)
+        {
+            if ((gameActivated && currentPlayer == "Player1" && !carryBarrel1.activeSelf) || (gameActivated && currentPlayer == "Player2" && !carryBarrel2.activeSelf))
+            {
+                this.SetInactive();
+                Debug.Log("Delivered Barrel");
+            }
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -182,6 +199,5 @@ public class CarryZone : MonoBehaviour
         this.gameActivated = false;
         this.currentPlayer = "None";
         this.displayPanel.SetActive(false);
-        this.spilledText.SetActive(false);
     }
 }
