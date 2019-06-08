@@ -5,6 +5,7 @@ using UnityEngine;
 public class MissileZone : MonoBehaviour
 {
     [SerializeField] private GameObject displayPanel;
+    [SerializeField] private GameObject UIAmmo;
 
     private bool gameActivated;
     private string currentPlayer;
@@ -67,6 +68,7 @@ public class MissileZone : MonoBehaviour
             else
             {
                 var ammoMaterial = ammo.transform.GetChild(currentAmmo).gameObject.GetComponent<Renderer>().material;
+                var UIAmmoMaterial = UIAmmo.transform.GetChild(currentAmmo).gameObject.GetComponent<Renderer>().material;
 
                 //Code to change material mode from fade to opaque (Taken from: https://answers.unity.com/questions/1004666/change-material-rendering-mode-in-runtime.html)
                 ammoMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
@@ -76,6 +78,14 @@ public class MissileZone : MonoBehaviour
                 ammoMaterial.DisableKeyword("_ALPHABLEND_ON");
                 ammoMaterial.DisableKeyword("_ALPHAPREMULTIPLY_ON");
                 ammoMaterial.renderQueue = -1;
+
+                UIAmmoMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+                UIAmmoMaterial.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
+                UIAmmoMaterial.SetInt("_ZWrite", 1);
+                UIAmmoMaterial.DisableKeyword("_ALPHATEST_ON");
+                UIAmmoMaterial.DisableKeyword("_ALPHABLEND_ON");
+                UIAmmoMaterial.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+                UIAmmoMaterial.renderQueue = -1;
 
                 currentAmmo++;
                 empty.SetActive(false);
@@ -183,6 +193,7 @@ public class MissileZone : MonoBehaviour
 
                     //Code to change material mode from opaque to fade (Taken from: https://answers.unity.com/questions/1004666/change-material-rendering-mode-in-runtime.html)
                     var ammoMaterial = ammo.transform.GetChild(currentAmmo).gameObject.GetComponent<Renderer>().material;
+                    var UIAmmoMaterial = UIAmmo.transform.GetChild(currentAmmo).gameObject.GetComponent<Renderer>().material;
                     ammoMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
                     ammoMaterial.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
                     ammoMaterial.SetInt("_ZWrite", 0);
@@ -191,7 +202,16 @@ public class MissileZone : MonoBehaviour
                     ammoMaterial.DisableKeyword("_ALPHAPREMULTIPLY_ON");
                     ammoMaterial.renderQueue = 3000;
 
-                    if(currentAmmo == 0)
+                    UIAmmoMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+                    UIAmmoMaterial.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+                    UIAmmoMaterial.SetInt("_ZWrite", 0);
+                    UIAmmoMaterial.DisableKeyword("_ALPHATEST_ON");
+                    UIAmmoMaterial.EnableKeyword("_ALPHABLEND_ON");
+                    UIAmmoMaterial.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+                    UIAmmoMaterial.renderQueue = 3000;
+
+
+                    if (currentAmmo == 0)
                     {
                         empty.SetActive(true);
                     }
