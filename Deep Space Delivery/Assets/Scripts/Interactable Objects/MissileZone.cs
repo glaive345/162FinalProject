@@ -70,22 +70,9 @@ public class MissileZone : MonoBehaviour
                 var ammoMaterial = ammo.transform.GetChild(currentAmmo).gameObject.GetComponent<Renderer>().material;
                 var UIAmmoMaterial = UIAmmo.transform.GetChild(currentAmmo).gameObject.GetComponent<Renderer>().material;
 
-                //Code to change material mode from fade to opaque (Taken from: https://answers.unity.com/questions/1004666/change-material-rendering-mode-in-runtime.html)
-                ammoMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
-                ammoMaterial.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
-                ammoMaterial.SetInt("_ZWrite", 1);
-                ammoMaterial.DisableKeyword("_ALPHATEST_ON");
-                ammoMaterial.DisableKeyword("_ALPHABLEND_ON");
-                ammoMaterial.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-                ammoMaterial.renderQueue = -1;
-
-                UIAmmoMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
-                UIAmmoMaterial.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
-                UIAmmoMaterial.SetInt("_ZWrite", 1);
-                UIAmmoMaterial.DisableKeyword("_ALPHATEST_ON");
-                UIAmmoMaterial.DisableKeyword("_ALPHABLEND_ON");
-                UIAmmoMaterial.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-                UIAmmoMaterial.renderQueue = -1;
+                //Code to change material mode from fade to opaque
+                ChangeMaterialMode(ammoMaterial, BlendMode.Opaque);
+                ChangeMaterialMode(UIAmmoMaterial, BlendMode.Opaque);
 
                 currentAmmo++;
                 empty.SetActive(false);
@@ -191,25 +178,11 @@ public class MissileZone : MonoBehaviour
                 {
                     currentAmmo--;
 
-                    //Code to change material mode from opaque to fade (Taken from: https://answers.unity.com/questions/1004666/change-material-rendering-mode-in-runtime.html)
+                    //Changing material from opaque to fade
                     var ammoMaterial = ammo.transform.GetChild(currentAmmo).gameObject.GetComponent<Renderer>().material;
                     var UIAmmoMaterial = UIAmmo.transform.GetChild(currentAmmo).gameObject.GetComponent<Renderer>().material;
-                    ammoMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-                    ammoMaterial.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-                    ammoMaterial.SetInt("_ZWrite", 0);
-                    ammoMaterial.DisableKeyword("_ALPHATEST_ON");
-                    ammoMaterial.EnableKeyword("_ALPHABLEND_ON");
-                    ammoMaterial.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-                    ammoMaterial.renderQueue = 3000;
-
-                    UIAmmoMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-                    UIAmmoMaterial.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-                    UIAmmoMaterial.SetInt("_ZWrite", 0);
-                    UIAmmoMaterial.DisableKeyword("_ALPHATEST_ON");
-                    UIAmmoMaterial.EnableKeyword("_ALPHABLEND_ON");
-                    UIAmmoMaterial.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-                    UIAmmoMaterial.renderQueue = 3000;
-
+                    ChangeMaterialMode(ammoMaterial, BlendMode.Fade);
+                    ChangeMaterialMode(UIAmmoMaterial, BlendMode.Fade);
 
                     if (currentAmmo == 0)
                     {
@@ -257,6 +230,38 @@ public class MissileZone : MonoBehaviour
 
 
             //NEED TO SEND EARLY EXIT TO SUBSCRIBERS
+        }
+    }
+
+    //Code to change material mode (Adapted from: https://answers.unity.com/questions/1004666/change-material-rendering-mode-in-runtime.html)
+    private enum BlendMode
+    {
+        Opaque,
+        Fade,
+    }
+
+    private void ChangeMaterialMode(Material standardShaderMaterial, BlendMode blendMode)
+    {
+        switch (blendMode)
+        {
+            case BlendMode.Opaque:
+                standardShaderMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+                standardShaderMaterial.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
+                standardShaderMaterial.SetInt("_ZWrite", 1);
+                standardShaderMaterial.DisableKeyword("_ALPHATEST_ON");
+                standardShaderMaterial.DisableKeyword("_ALPHABLEND_ON");
+                standardShaderMaterial.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+                standardShaderMaterial.renderQueue = -1;
+                break;
+            case BlendMode.Fade:
+                standardShaderMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+                standardShaderMaterial.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+                standardShaderMaterial.SetInt("_ZWrite", 0);
+                standardShaderMaterial.DisableKeyword("_ALPHATEST_ON");
+                standardShaderMaterial.EnableKeyword("_ALPHABLEND_ON");
+                standardShaderMaterial.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+                standardShaderMaterial.renderQueue = 3000;
+                break;
         }
     }
 }

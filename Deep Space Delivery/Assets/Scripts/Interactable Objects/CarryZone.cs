@@ -6,7 +6,6 @@ public class CarryZone : MonoBehaviour
 {
     [SerializeField] private GameObject displayPanel;
     [SerializeField] private GameObject barrelProp;
-    [SerializeField] private GameObject barrelPrefab;
 
     private bool gameActivated;
     private string currentPlayer;
@@ -70,25 +69,7 @@ public class CarryZone : MonoBehaviour
                 spillSustainTimer += Time.deltaTime;
                 if(spillSustainTimer >= spillTime)
                 {
-                    //Reset Barrel
-                    this.barrel.transform.localRotation = Quaternion.Euler(barrel.transform.localRotation.x, barrel.transform.localRotation.y, 0);
-                    //REMOVE SPILL ANIMATION
-
-                    //Removes barrel from in front of player
-                    if (currentPlayer == "Player2")
-                    {
-                        carryBarrel2.SetActive(false);
-                    }
-                    else
-                    {
-                        carryBarrel1.SetActive(false);
-                    }
-
-                    //Removes minigame screen
-                    this.gameActivated = false;
-                    this.currentPlayer = "None";
-                    this.displayPanel.SetActive(false);
-                    this.spilledText.SetActive(false);
+                    this.SetInactive();
                 }
             }
             else
@@ -141,23 +122,7 @@ public class CarryZone : MonoBehaviour
                 //If game still activated, deactivate game
                 if (gameActivated)
                 {
-                    this.barrel.transform.localRotation = Quaternion.Euler(barrel.transform.localRotation.x, barrel.transform.localRotation.y, 0);
-                    //REMOVE SPILL ANIMATION
-
-                    //Removes barrel from in front of player
-                    if (currentPlayer == "Player2")
-                    {
-                        carryBarrel2.SetActive(false);
-                    }
-                    else
-                    {
-                        carryBarrel1.SetActive(false);
-                    }
-
-                    this.gameActivated = false;
-                    this.currentPlayer = "None";
-                    this.displayPanel.SetActive(false);
-                    this.spilledText.SetActive(false);
+                    this.SetInactive();
                 }
             }
         }
@@ -198,5 +163,25 @@ public class CarryZone : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void SetInactive()
+    {
+        this.barrel.transform.localRotation = Quaternion.Euler(barrel.transform.localRotation.x, barrel.transform.localRotation.y, 0);
+
+        //Removes barrel from in front of player
+        if (currentPlayer == "Player2")
+        {
+            carryBarrel2.SetActive(false);
+        }
+        else
+        {
+            carryBarrel1.SetActive(false);
+        }
+
+        this.gameActivated = false;
+        this.currentPlayer = "None";
+        this.displayPanel.SetActive(false);
+        this.spilledText.SetActive(false);
     }
 }

@@ -28,7 +28,14 @@ public class P1Controller : MonoBehaviour
             var speed = Mathf.Sqrt(directionX * directionX + directionY * directionY);
             this.gameObject.transform.rotation = Quaternion.Euler(degree, 90, 270);
             this.gameObject.GetComponent<Animator>().speed = speed;
-            this.gameObject.GetComponent<Animator>().Play("HumanoidRun");
+            if (gameObject.transform.GetChild(2).gameObject.activeSelf)
+            {
+                this.gameObject.GetComponent<Animator>().Play("HumanoidWalk");
+            }
+            else
+            {
+                this.gameObject.GetComponent<Animator>().Play("HumanoidRun");
+            }
         }
     }
 }
