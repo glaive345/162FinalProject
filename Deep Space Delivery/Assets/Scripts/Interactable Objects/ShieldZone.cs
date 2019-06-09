@@ -12,15 +12,20 @@ public class ShieldZone : MonoBehaviour
     //ADD OTHER VARIABLES HERE
     [SerializeField] private float lowChargeMaximum;
     [SerializeField] private float highChargeMaximum;
+    [SerializeField] private float highChargeLeniency;
 
     [SerializeField] private float spinSpeed;
     [SerializeField] private float chargeRateMulitplier;
     [SerializeField] private float decayRateMultiplier;
 
+
     private bool beginDecay;
 
     private GameObject rotateBar;
     private GameObject chargeBar;
+
+    [SerializeField] private GameObject UIScripts;
+    private ShieldBarManager shieldBarManager;
 
     void Start()
     {
@@ -33,6 +38,7 @@ public class ShieldZone : MonoBehaviour
         this.rotateBar = this.displayPanel.transform.GetChild(3).gameObject;
         this.chargeBar = this.displayPanel.transform.GetChild(5).gameObject;
 
+        this.shieldBarManager = UIScripts.GetComponent<ShieldBarManager>();
 
         this.displayPanel.SetActive(false);
     }
@@ -84,12 +90,17 @@ public class ShieldZone : MonoBehaviour
                 {
                     beginDecay = true;
                 }
+
+                //If held too long chargebar decreases to zero
                 if (beginDecay)
                 {
-                    chargeBar.transform.localScale = new Vector3(chargeBar.transform.localScale.x, chargeBar.transform.localScale.y - decayRateMultiplier * chargeRateMulitplier * Time.deltaTime, chargeBar.transform.localScale.z);
-                    if (chargeBar.transform.localScale.y <= 0)
+                    if(chargeBar.transform.localScale.y - decayRateMultiplier * chargeRateMulitplier * Time.deltaTime > 0)
                     {
-                        beginDecay = false;
+                        chargeBar.transform.localScale = new Vector3(chargeBar.transform.localScale.x, chargeBar.transform.localScale.y - decayRateMultiplier * chargeRateMulitplier * Time.deltaTime, chargeBar.transform.localScale.z);
+                    }
+                    else
+                    {
+                        chargeBar.transform.localScale = new Vector3(chargeBar.transform.localScale.x, 0, chargeBar.transform.localScale.z);
                     }
                 }
             }
@@ -101,7 +112,17 @@ public class ShieldZone : MonoBehaviour
             var savedCharge = chargeBar.transform.localScale.y / 150;
             chargeBar.transform.localScale = new Vector3(chargeBar.transform.localScale.x, 0, chargeBar.transform.localScale.z);
 
-            //NEED TO CHECK FOR LARGE CHARGE ON OVERLAP
+            //Check if released near green diamond for bonus charge, else regular charge
+            if (Mathf.Abs(rotateBar.transform.localRotation.z) < highChargeLeniency)
+            {
+                savedCharge = savedCharge * highChargeMaximum;
+            }
+            else
+            {
+                savedCharge = savedCharge * lowChargeMaximum;
+            }
+
+            shieldBarManager.changeBar(savedCharge);
             //SEND TO SUBSCRIBERS RESULT
         }
     }
@@ -123,9 +144,6 @@ public class ShieldZone : MonoBehaviour
             this.displayPanel.SetActive(false);
 
             currentPlayer = "None";
-
-
-            //NEED TO SEND EARLY EXIT TO SUBSCRIBERS
         }
     }
 }

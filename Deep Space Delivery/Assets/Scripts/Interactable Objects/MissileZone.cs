@@ -52,7 +52,6 @@ public class MissileZone : MonoBehaviour
 
 
         this.displayPanel.SetActive(false);
-        minigamePublisherManager.Register("Missile", false, 0, "None");
     }
 
     private void Update()
