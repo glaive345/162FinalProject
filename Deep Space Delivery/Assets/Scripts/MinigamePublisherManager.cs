@@ -14,68 +14,68 @@ public class MinigamePublisherManager : MonoBehaviour
 
 
 
-    public void SendMessageWithPublisher(int group, bool activated)
+    public void SendMessageWithPublisher(string minigameName, bool success, float degreeOfSuccesss, string endState)
     {
 
-        switch (group)
+        switch (minigameName)
         {
-            case 1:
-                MiniGame1Publisher.Notify(activated);
+            case "Shield":
+                MiniGame1Publisher.Notify(success, degreeOfSuccesss, endState);
                 break;
-            case 2:
-                MiniGame2Publisher.Notify(activated);
+            case "Laser":
+                MiniGame2Publisher.Notify(success, degreeOfSuccesss, endState);
                 break;
-            case 3:
-                Minigame3Publisher.Notify(activated);
+            case "Bridge":
+                Minigame3Publisher.Notify(success, degreeOfSuccesss, endState);
                 break;
-            case 4:
-                MiniGame4Publisher.Notify(activated);
+            case "Missile":
+                MiniGame4Publisher.Notify(success, degreeOfSuccesss, endState);
                 break;
-            case 5:
-                Minigame5Publisher.Notify(activated);
+            case "Soda":
+                Minigame5Publisher.Notify(success, degreeOfSuccesss, endState);
                 break;
 
         }
     }
-    public void Register(int group, System.Action<bool> callback)
+    public void Register(string minigameName, System.Action<bool> success, System.Action<float> degreeOfSuccess, System.Action<string> endState)
     {
-        switch (group)
+        switch (minigameName)
         {
-            case 1:
-                MiniGame1Publisher.Register(callback);
+            case "Shield":
+                MiniGame1Publisher.Register(success, degreeOfSuccess, endState);
                 break;
-            case 2:
-                MiniGame2Publisher.Register(callback);
+            case "Laser":
+                MiniGame2Publisher.Register(success, degreeOfSuccess, endState);
                 break;
-            case 3:
-                Minigame3Publisher.Register(callback);
+            case "Bridge":
+                Minigame3Publisher.Register(success, degreeOfSuccess, endState);
                 break;
-            case 4:
-                MiniGame4Publisher.Register(callback);
+            case "Missile":
+                MiniGame4Publisher.Register(success, degreeOfSuccess, endState);
                 break;
-            case 5:
-                Minigame5Publisher.Register(callback);
+            case "Soda":
+                Minigame5Publisher.Register(success, degreeOfSuccess, endState);
                 break;
         }
     }
-    public void Unregister(int group, System.Action<bool> callback)
+    public void Unregister(string minigameName, System.Action<bool> success, System.Action<float> degreeOfSuccess, System.Action<string> endState)
     {
-        switch (group)
+        switch (minigameName)
         {
-            case 1:
-                MiniGame1Publisher.Unregister(callback);
+            case "Shield":
+                MiniGame1Publisher.Unregister(success, degreeOfSuccess, endState);
                 break;
-            case 2:
-                MiniGame2Publisher.Unregister(callback);
+            case "Laser":
+                MiniGame2Publisher.Unregister(success, degreeOfSuccess, endState);
                 break;
-            case 3:
-                Minigame3Publisher.Unregister(callback);
+            case "Bridge":
+                Minigame3Publisher.Unregister(success, degreeOfSuccess, endState);
                 break;
-            case 4:
-                MiniGame4Publisher.Unregister(callback);
+            case "Missile":
+                MiniGame4Publisher.Unregister(success, degreeOfSuccess, endState);
                 break;
-            case 5:
-                Minigame5Publisher.Unregister(callback);
+            case "Soda":
+                Minigame5Publisher.Unregister(success, degreeOfSuccess, endState);
                 break;
         }
     }

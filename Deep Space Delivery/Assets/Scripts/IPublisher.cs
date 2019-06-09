@@ -6,10 +6,10 @@ namespace DeepSpace
 {
     public interface IPublisher
     {
-        void Unregister(System.Action<bool> callback);
+        void Unregister(System.Action<bool> success, System.Action<float> degreeOfSuccess, System.Action<string> endState);
 
-        void Register(System.Action<bool> callback);
+        void Register(System.Action<bool> success, System.Action<float> degreeOfSuccess, System.Action<string> endState);
 
-        void Notify(bool callback);
+        void Notify(bool success, float degreeOfSuccess, string endState);
     }
 }
