@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Runtime;
 
 public class EventManager : MonoBehaviour
 {
@@ -13,24 +14,24 @@ public class EventManager : MonoBehaviour
     [SerializeField] private GameObject UIScripts;
     private LaserZone LaserZone;
 
-    private Tuple<bool, float> AsteroidEvent;
-    private Tuple<bool, float> CaffeineEvent;
-    private Tuple<bool, float> SpaceMonsterEvent;
-    private Tuple<bool, float> PowerOuttageEvent;
+    private MyTuple AsteroidEvent;
+    private MyTuple CaffeineEvent;
+    private MyTuple SpaceMonsterEvent;
+    private MyTuple PowerOuttageEvent;
 
-    private Tuple<bool, float>[] eventList;
+    private MyTuple[] eventList;
 
     private float TIMELIMIT = 10.0f;
 
     void Start()
     {
         this.time = 0.0f;
-        this.AsteroidEvent = new Tuple<bool,float> (false,0.0f);
-        this.CaffeineEvent = new Tuple<bool, float>(false, 0.0f);
-        this.SpaceMonsterEvent = new Tuple<bool, float>(false, 0.0f);
-        this.PowerOuttageEvent = new Tuple<bool, float>(false, 0.0f);
+        this.AsteroidEvent = new MyTuple (false,0.0f);
+        this.CaffeineEvent = new MyTuple(false, 0.0f);
+        this.SpaceMonsterEvent = new MyTuple(false, 0.0f);
+        this.PowerOuttageEvent = new MyTuple(false, 0.0f);
 
-        this.eventList = new Tuple<bool, float>[] { AsteroidEvent, this.CaffeineEvent, this.SpaceMonsterEvent, this.PowerOuttageEvent };
+        this.eventList = new MyTuple[] { AsteroidEvent, this.CaffeineEvent, this.SpaceMonsterEvent, this.PowerOuttageEvent };
     }
 
     // Update is called once per frame
@@ -46,7 +47,7 @@ public class EventManager : MonoBehaviour
 
     void eventAssignment()
     {
-        int num = random.next(0, 3);
+        int num = random.Next(0, 3);
         if (this.eventList[num].Item1 != true)
         {
             this.eventList[num].Item1 = true;
@@ -74,18 +75,29 @@ public class EventManager : MonoBehaviour
 
     void incrementTime()
     {
-        foreach (int i in this.eventList)
+        foreach (MyTuple i in this.eventList)
         {
-            if (this.eventList[i].Item1 == true)
+            if (i.Item1 == true)
             {
-                this.eventList[i].Item2 = this.eventList[i].Item2 + time.deltaTime;
+                i.Item2 = i.Item2 + Time.deltaTime;
             }//close if
-            if (this.eventList[i].Item2 == this.TIMELIMIT)
+            if (i.Item2 == this.TIMELIMIT)
             {
-                this.eventList[i].Item1 = false;
+                i.Item1 = false;
                 //some failure statement
             }
         }//close foreach
         return;
     }
+}
+
+public class MyTuple
+{
+   public MyTuple(bool item1, float item2)
+   {
+     Item1 = item1;
+     Item2 = item2; 
+   }
+   public bool Item1 {get;set;}
+   public float Item2 {get;set;}
 }
