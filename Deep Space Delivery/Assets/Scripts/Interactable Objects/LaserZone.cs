@@ -46,7 +46,7 @@ public class LaserZone : MonoBehaviour
             this.heat -= Time.deltaTime * 10;
         }
 
-        if (this.heat < 50)
+        if (this.heat < 60)
         {
             this.coolingDown = false;
         }
