@@ -21,6 +21,8 @@ public class LaserZone : MonoBehaviour
     private float prevTime;
     private bool coolingDown;
 
+    private bool eventActivated;
+
     //ADD OTHER VARIABLES HERE
 
 
@@ -34,6 +36,7 @@ public class LaserZone : MonoBehaviour
         this.gameInitiated = false;
         this.prevTime = 0;
         this.coolingDown = false;
+        this.eventActivated = false;
 
         //PREINITIALIZE VARIABLES HERE
         this.displayPanel.SetActive(false);

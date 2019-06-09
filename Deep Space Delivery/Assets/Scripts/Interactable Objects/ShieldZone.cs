@@ -25,7 +25,7 @@ public class ShieldZone : MonoBehaviour
     private GameObject chargeBar;
 
     [SerializeField] private GameObject UIScripts;
-    private ShieldBarManager shieldBarManager;
+    private LaserZone LaserZone;
 
     void Start()
     {
