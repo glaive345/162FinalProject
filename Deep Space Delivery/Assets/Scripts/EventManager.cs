@@ -3,13 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Random;
 
 public class EventManager : MonoBehaviour
 {
     private float time;
-    EventPublisherManager EventPublisherManager;
-    Random random = new Random();
+    System.Random random = new System.Random();
     // Use this for initialization
 
     [SerializeField] private GameObject UIScripts;
@@ -20,11 +18,9 @@ public class EventManager : MonoBehaviour
     private Tuple<bool, float> SpaceMonsterEvent;
     private Tuple<bool, float> PowerOuttageEvent;
 
-    private Tuple<bool, float> eventList;
+    private Tuple<bool, float>[] eventList;
 
-    private Tuple<bool, float> AsteroidEvent;
-
-    const private float TIMELIMIT = 10.0f;
+    private float TIMELIMIT = 10.0f;
 
     void Start()
     {
@@ -34,13 +30,7 @@ public class EventManager : MonoBehaviour
         this.SpaceMonsterEvent = new Tuple<bool, float>(false, 0.0f);
         this.PowerOuttageEvent = new Tuple<bool, float>(false, 0.0f);
 
-        this.eventList =
-        {
-            this.AsteroidEvent,
-            this.CaffeineEvent,
-            this.SpaceMonsterEvent,
-            this.PowerOuttageEvent,
-        };
+        this.eventList = new Tuple<bool, float>[] { AsteroidEvent, this.CaffeineEvent, this.SpaceMonsterEvent, this.PowerOuttageEvent };
     }
 
     // Update is called once per frame
@@ -63,12 +53,19 @@ public class EventManager : MonoBehaviour
             switch (num)
             {
                 case 0:
+                    //if ship is running low on shield when time limit ends, deals damage
+                    //if laser game is completed, this.eventlist[num[.Item1 = falase, item2 =0.0f;
                     break;
                 case 1:
+                    //if soda machine minigame is not finished, slows down the player. after 10 seconds,
+                    //player movement is slowed down by 50%.
+                    //if played
                     break;
                 case 2:
+                    //same with Asteroid Event
                     break;
                 case 3:
+                    //"disables" all the minigames for 3 secons?
                     break;
             }
         }
@@ -77,7 +74,7 @@ public class EventManager : MonoBehaviour
 
     void incrementTime()
     {
-        foreach int i in this.eventList
+        foreach (int i in this.eventList)
         {
             if (this.eventList[i].Item1 == true)
             {
