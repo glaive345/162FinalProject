@@ -37,7 +37,7 @@ public class MinigamePublisherManager : MonoBehaviour
 
         }
     }
-    public void Register(string minigameName, System.Action<bool> success, System.Action<float> degreeOfSuccess, System.Action<string> endState)
+    public void Register(string minigameName, bool success, float degreeOfSuccess, string endState)
     {
         switch (minigameName)
         {
@@ -58,7 +58,7 @@ public class MinigamePublisherManager : MonoBehaviour
                 break;
         }
     }
-    public void Unregister(string minigameName, System.Action<bool> success, System.Action<float> degreeOfSuccess, System.Action<string> endState)
+    public void Unregister(string minigameName, bool success, float degreeOfSuccess, string endState)
     {
         switch (minigameName)
         {

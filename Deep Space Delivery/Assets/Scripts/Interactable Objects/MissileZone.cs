@@ -18,6 +18,7 @@ public class MissileZone : MonoBehaviour
     [SerializeField] private float targetSpeedMultiplier;
     [SerializeField] private float reloadSpeedMultiplier;
     [SerializeField] private float targetEraticness;
+    [SerializedField] private MinigamePublisherManager minigamePublisherManager;
 
     private int maxAmmo;
     private int currentAmmo;
@@ -52,6 +53,7 @@ public class MissileZone : MonoBehaviour
 
 
         this.displayPanel.SetActive(false);
+        minigamePublisherManager.Register("Missile", false, 0, "None");
     }
 
     private void Update()

@@ -36,14 +36,14 @@ namespace DeepSpace
         }
 
         //Interface to add to the RegList
-        void IPublisher.Register(System.Action<bool> success, System.Action<float> degreeOfSuccess, System.Action<string> endState)
+        void IPublisher.Register(bool success, float degreeOfSuccess, string endState)
         {
             RegListSuccess.Add(success);
             RegListDegree.Add(degreeOfSuccess);
             RegListState.Add(endState);
         }
         //Interface to remove from the RegList
-        void IPublisher.Unregister(System.Action<bool> success, System.Action<float> degreeOfSuccess, System.Action<string> endState)
+        void IPublisher.Unregister(bool success, float degreeOfSuccess, string endState)
         {
             RegListSuccess.Remove(success);
             RegListDegree.Remove(degreeOfSuccess);
