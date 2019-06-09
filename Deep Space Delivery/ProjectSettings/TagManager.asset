@@ -6,6 +6,8 @@ TagManager:
   tags:
   - SF_Door
   - Target
+  - Boundary
+  - Laser
   layers:
   - Default
   - TransparentFX

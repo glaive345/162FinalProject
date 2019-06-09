@@ -16,6 +16,7 @@ public class BridgeZone : MonoBehaviour
     // current number of window being displayed
     private int systemHealth;
     private float throttle;
+    private int remainingWindows;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,7 @@ public class BridgeZone : MonoBehaviour
         this.currentPlayer = "None";
         this.systemHealth = 100;
         this.throttle = Random.Range(0.0f, 10.0f);
+        this.remainingWindows = 0;
 
         // for(int i = 0; i < 20; i++)
         // {
@@ -42,7 +44,7 @@ public class BridgeZone : MonoBehaviour
     void Update()
     {
         this.throttle -= Time.deltaTime;
-        if (this.throttle <= 0)
+        if (this.throttle <= 0 && this.systemHealth > 0)
         {
             var randDamage = Random.Range(1, 5);
             if (this.gameActivated)
@@ -50,21 +52,22 @@ public class BridgeZone : MonoBehaviour
                 for (var i = 0; i < randDamage; i++)
                 {
                     this.createWindow();
+                    this.remainingWindows++;
                 }
             }
             this.systemHealth -= randDamage;
             this.throttle = Random.Range(0.0f, 10.0f);
         }
-        if (this.systemHealth != 100)
-        {
-            Debug.Log(this.systemHealth);
-        }
+        // if (this.systemHealth != 100)
+        // {
+        //     Debug.Log(this.systemHealth);
+        // }
     }
 
     private void createWindow()
     {
         GameObject tempWindow = Instantiate(
-            warningWindowPrefab, this.displayPanel.transform.position, Quaternion.identity);
+            warningWindowPrefab, this.displayPanel.transform.position, this.displayPanel.transform.rotation);
         tempWindow.GetComponent<RectTransform>().sizeDelta = new Vector2(175.34f, 56.91f);
         tempWindow.transform.SetParent(this.displayPanel.transform);
         tempWindow.GetComponent<RectTransform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
@@ -83,10 +86,11 @@ public class BridgeZone : MonoBehaviour
             {
                 // activating Game
                 this.displayPanel.SetActive(true);
-                for (var i = 0; i < 100 - this.systemHealth; i++)
+                var temp = 100 - this.systemHealth - this.remainingWindows;
+                for (var i = 0; i < temp; i++)
                 {
                     this.createWindow();
-                    Debug.Log("creating window");
+                    this.remainingWindows++;
                 }
 
                 //Setting Starting Player
@@ -103,14 +107,13 @@ public class BridgeZone : MonoBehaviour
                     this.displayPanel.transform.localPosition = new Vector3(-734.5284f, 0, 0);
                 }
             }
-
             else if (this.systemHealth < 100)
             {
-
                 var lastChild = this.displayPanel.transform.GetChild(this.displayPanel.transform.childCount - 1);
-                Debug.Log(lastChild);
+                // Debug.Log(lastChild);
                 Destroy(lastChild.gameObject);
                 this.systemHealth++;
+                this.remainingWindows--;
             }
 
             //Progresses game if player who initiated it interacts

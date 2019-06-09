@@ -8,10 +8,18 @@ public class LaserZone : MonoBehaviour
     [SerializeField] private GameObject targetPrefab;
     [SerializeField] private GameObject laserPrefab;
     [SerializeField] private GameObject gun;
+    [SerializeField] private GameObject coolDownBar;
 
+    private int remainingTargets;
+    private float dtime;
+    public int Damage;
 
     private bool gameActivated;
     private string currentPlayer;
+    private bool gameInitiated;
+    private float heat;
+    private float prevTime;
+    private bool coolingDown;
 
     //ADD OTHER VARIABLES HERE
 
@@ -20,15 +28,50 @@ public class LaserZone : MonoBehaviour
     {
         this.gameActivated = false;
         this.currentPlayer = "None";
+        this.remainingTargets = 0;
+        this.dtime = 0;
+        this.Damage = 0;
+        this.gameInitiated = false;
+        this.prevTime = 0;
+        this.coolingDown = false;
 
         //PREINITIALIZE VARIABLES HERE
-
         this.displayPanel.SetActive(false);
+    }
+
+    void Update()
+    {
+        if (this.heat > 0)
+        {
+            this.heat -= Time.deltaTime * 10;
+        }
+
+        if (this.heat < 50)
+        {
+            this.coolingDown = false;
+        }
+
+        this.coolDownBar.transform.localScale = new Vector3(3 * this.heat, 10, 1);
+        // dtime -= Time.deltaTime;
+        // if (this.gameActivated && this.remainingTargets > 0 && this.dtime <= 0)
+        // {
+        //     this.createTarget();
+        //     this.dtime = Random.Range(0.0f, 1.0f);
+        //     this.remainingTargets--;
+        // }
     }
 
     private void OnTriggerStay(Collider other)
     {
         //If player1 or player 2 interacts
+        dtime -= Time.deltaTime;
+        if (this.gameActivated && this.remainingTargets > 0 && this.dtime <= 0)
+        {
+            this.createTarget();
+            this.dtime = Random.Range(0.0f, 1.0f);
+            this.remainingTargets--;
+        }
+
         if ((other.gameObject.name == "Player1" && Input.GetButtonDown("Utility1"))
             || (other.gameObject.name == "Player2" && Input.GetButtonDown("Utility2")))
         {
@@ -37,10 +80,10 @@ public class LaserZone : MonoBehaviour
                 //Initializing Game
                 //INITIALIZE START STATE HERE
                 this.displayPanel.SetActive(true);
-                var numTargets = Random.Range(10, 20);
-                for (var i = 0; i < numTargets; i++)
+                if (!gameInitiated)
                 {
-                    this.createTarget();
+                    this.remainingTargets = Random.Range(10, 20);
+                    this.gameInitiated = true;
                 }
 
                 //Setting Starting Player
@@ -58,12 +101,30 @@ public class LaserZone : MonoBehaviour
                 }
             }
             //Progresses game if player who initiated it interacts
-            else if (currentPlayer == other.gameObject.name)
+            else if (currentPlayer == other.gameObject.name && !this.coolingDown)
             {
                 //Playing Game
                 //ADD ON-INTERACT EFFECT HERE
-
                 this.createLaser();
+
+                if (this.prevTime != 0)
+                {
+                    var tempTime = Time.time - this.prevTime;
+                    float tempHeat = 5;
+                    if (tempTime < 2)
+                    {
+                        tempHeat = -12.5f * tempTime + 20;
+                    }
+                    this.heat += tempHeat;
+                    if (this.heat > 100)
+                    {
+                        this.heat = 100;
+                        this.coolingDown = true;
+                    }
+                    Debug.Log(this.heat);
+                }
+
+                this.prevTime = Time.time;
 
                 //NEED TO SEND RESULTS TO SUBSCRIBERS
             }
@@ -73,24 +134,22 @@ public class LaserZone : MonoBehaviour
     private void createTarget()
     {
         GameObject tempTarget = Instantiate(
-            this.targetPrefab, this.displayPanel.transform.position, Quaternion.identity);
-        tempTarget.GetComponent<RectTransform>().sizeDelta = new Vector2(1.0f, 1.0f);
+            this.targetPrefab, this.displayPanel.transform.position, this.displayPanel.transform.rotation);
         tempTarget.transform.SetParent(this.displayPanel.transform);
         tempTarget.transform.localPosition = new Vector3(162.9f, -126.2f, 0);
         var randScale = Random.Range(10.0f, 25.0f);
-        tempTarget.GetComponent<RectTransform>().localScale = new Vector3(randScale, randScale, randScale);
-        var randForce = new Vector2(Random.Range(-7.5f, -3.0f), Random.Range(100.0f, 200.0f));
-        tempTarget.GetComponent<Rigidbody2D>().AddForce(randForce);
+        tempTarget.transform.localScale = new Vector3(randScale, randScale, randScale);
+        var randForce = new Vector2(Random.Range(-7.5f, -3.0f), Random.Range(70.0f, 150.0f));
+        tempTarget.GetComponent<Rigidbody>().AddRelativeForce(randForce);
     }
 
     private void createLaser()
     {
         GameObject tempLaser = Instantiate(
-            this.laserPrefab, this.gun.transform.position, Quaternion.identity);
-        tempLaser.GetComponent<RectTransform>().sizeDelta = new Vector2(1.0f, 1.0f);
+            this.laserPrefab, this.gun.transform.position, this.displayPanel.transform.rotation);
         tempLaser.transform.SetParent(this.displayPanel.transform);
-        tempLaser.GetComponent<RectTransform>().localScale = new Vector3(13.0f, -0.5f, 1.0f);
-        tempLaser.GetComponent<Rigidbody2D>().AddForce(new Vector2(200.0f, 0));
+        tempLaser.transform.localScale = new Vector3(50.0f, 1.0f, 1.0f);
+        tempLaser.GetComponent<Rigidbody>().AddRelativeForce(new Vector2(350.0f, 0));
     }
 
     private void OnTriggerExit(Collider other)
@@ -100,9 +159,6 @@ public class LaserZone : MonoBehaviour
         {
             //Closing Game
             //RESET VARIABLES HERE
-
-            // destroy prefabs
-
 
 
             this.gameActivated = false;
