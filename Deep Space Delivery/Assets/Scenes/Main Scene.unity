@@ -19852,6 +19852,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayPanel: {fileID: 1655983991}
+  refuelRateMultiplier: 20
+  barrelDrainMultiplier: 7.5
+  fuelDrainMultiplier: 2.25
+  mainEngineDrainMultiplier: 1.5
 --- !u!1 &628562692
 GameObject:
   m_ObjectHideFlags: 0

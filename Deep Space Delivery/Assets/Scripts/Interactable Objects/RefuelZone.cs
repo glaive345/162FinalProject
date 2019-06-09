@@ -23,7 +23,14 @@ public class RefuelZone : MonoBehaviour
     private GameObject noBarrels;
     private GameObject currentPointer;
 
+    [SerializeField] private float refuelRateMultiplier;
+    [SerializeField] private float barrelDrainMultiplier;
+    [SerializeField] private float fuelDrainMultiplier;
+    [SerializeField] private float mainEngineDrainMultiplier;
 
+    private bool mainActive;
+    private bool topActive;
+    private bool botActive;
 
     void Start()
     {
@@ -31,7 +38,7 @@ public class RefuelZone : MonoBehaviour
         this.currentPlayer = "None";
 
         //PREINITIALIZE VARIABLES HERE
-        barrelCount = 0;
+        barrelCount = 3;
         fuelPointingTo = 0;
 
         barrel = this.displayPanel.transform.GetChild(2).gameObject;
@@ -48,7 +55,46 @@ public class RefuelZone : MonoBehaviour
         barrelFuelBar.SetActive(false);
         barrelCurrentFuel.SetActive(false);
 
+        this.updateDisplay();
+
+        mainActive = true;
+        topActive = true;
+        botActive = true;
+
         this.displayPanel.SetActive(false);
+    }
+
+    private void Update()
+    {
+        var drain = - fuelDrainMultiplier * Time.deltaTime;
+        this.changeFuelLevel(0, drain * mainEngineDrainMultiplier);
+        this.changeFuelLevel(1, drain);
+        this.changeFuelLevel(2, drain);
+
+        if (gameActivated)
+        {
+            //Moves pointer when button is released
+            if ((currentPlayer == "Player1" && Input.GetButtonUp("Utility1")) || (currentPlayer == "Player2" && Input.GetButtonUp("Utility2")))
+            {
+                fuelPointingTo++;
+                if (fuelPointingTo > 2)
+                {
+                    fuelPointingTo = 0;
+                }
+                switch (fuelPointingTo)
+                {
+                    case 0:
+                        currentPointer.GetComponent<RectTransform>().localPosition = new Vector3(-68.1f, 0, 0);
+                        break;
+                    case 1:
+                        currentPointer.GetComponent<RectTransform>().localPosition = new Vector3(-40, 75, 0);
+                        break;
+                    case 2:
+                        currentPointer.GetComponent<RectTransform>().localPosition = new Vector3(-40, -75, 0);
+                        break;
+                }
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -91,19 +137,29 @@ public class RefuelZone : MonoBehaviour
                     this.displayPanel.transform.localPosition = new Vector3(-734.5284f, 0, 0);
                 }
             }
-            //Progresses game if player who initiated it interacts
-            else if (currentPlayer == other.gameObject.name)
+        }
+        if ((currentPlayer == other.gameObject.name && Input.GetButton("Utility1")) || (currentPlayer == other.gameObject.name && Input.GetButton("Utility2")))
+        {
+            if(barrelCount > 0)
             {
-                //Playing Game
-                //ADD ON-INTERACT EFFECT HERE
-                fuelPointingTo++;
-                if(fuelPointingTo > 3)
+                if (barrelCurrentFuel.transform.localScale.y - barrelDrainMultiplier * Time.deltaTime > 0)
                 {
-                    fuelPointingTo = 0;
+                    barrelCurrentFuel.transform.localScale = new Vector3(barrelCurrentFuel.transform.localScale.x, barrelCurrentFuel.transform.localScale.y - barrelDrainMultiplier * Time.deltaTime, barrelCurrentFuel.transform.localScale.z);
+
+
+                    this.changeFuelLevel(fuelPointingTo, refuelRateMultiplier * Time.deltaTime);
                 }
-
-
-                //NEED TO SEND RESULTS TO SUBSCRIBERS
+                //When current barrel runs out of fuel
+                else
+                {
+                    barrelCount--;
+                    //If barrels still remaining refill barrel
+                    if(barrelCount > 0)
+                    {
+                        barrelCurrentFuel.transform.localScale = new Vector3(barrelCurrentFuel.transform.localScale.x, 100, barrelCurrentFuel.transform.localScale.z);
+                    }
+                    this.updateDisplay();
+                }
             }
         }
     }
@@ -148,5 +204,66 @@ public class RefuelZone : MonoBehaviour
             barrelCurrentFuel.SetActive(false);
         }
         storedBarrels.text = "Barrels: " + barrelCount;
+    }
+
+    public void changeFuelLevel(int tankNumber, float change)
+    {
+        switch (tankNumber)
+        {
+            //Main Fuel
+            case 0:
+                if (mainFuel.transform.localScale.y + change < 250 && mainFuel.transform.localScale.y + change > 0)
+                {
+                    mainFuel.transform.localScale = new Vector3(mainFuel.transform.localScale.x, mainFuel.transform.localScale.y + change, mainFuel.transform.localScale.z);
+                    mainActive = true;
+                }
+                else if(mainFuel.transform.localScale.y + change >= 250)
+                {
+                    mainFuel.transform.localScale = new Vector3(mainFuel.transform.localScale.x, 250, mainFuel.transform.localScale.z);
+                    mainActive = true;
+                }
+                else
+                {
+                    mainFuel.transform.localScale = new Vector3(mainFuel.transform.localScale.x, 0, mainFuel.transform.localScale.z);
+                    mainActive = false;
+                }
+                break;
+            //Top Aux
+            case 1:
+                if (topAuxFuel.transform.localScale.y + change < 100 && topAuxFuel.transform.localScale.y + change > 0)
+                {
+                    topAuxFuel.transform.localScale = new Vector3(topAuxFuel.transform.localScale.x, topAuxFuel.transform.localScale.y + change, topAuxFuel.transform.localScale.z);
+                    topActive = true;
+                }
+                else if(topAuxFuel.transform.localScale.y + change >= 100)
+                {
+                    topAuxFuel.transform.localScale = new Vector3(topAuxFuel.transform.localScale.x, 100, topAuxFuel.transform.localScale.z);
+                    topActive = true;
+                }
+                else
+                {
+                    topAuxFuel.transform.localScale = new Vector3(topAuxFuel.transform.localScale.x, 0, topAuxFuel.transform.localScale.z);
+                    topActive = false;
+                }
+                break;
+            //Bot Aux
+            case 2:
+                if (botAuxFuel.transform.localScale.y + change < 100 && botAuxFuel.transform.localScale.y + change > 0)
+                {
+                    botAuxFuel.transform.localScale = new Vector3(botAuxFuel.transform.localScale.x, botAuxFuel.transform.localScale.y + change, botAuxFuel.transform.localScale.z);
+                    botActive = true;
+                }
+                else if(botAuxFuel.transform.localScale.y + change >= 100)
+                {
+                    botAuxFuel.transform.localScale = new Vector3(botAuxFuel.transform.localScale.x, 100, botAuxFuel.transform.localScale.z);
+                    botActive = true;
+                }
+                else
+                {
+                    botAuxFuel.transform.localScale = new Vector3(botAuxFuel.transform.localScale.x, 0, botAuxFuel.transform.localScale.z);
+                    botActive = false;
+                }
+                break;
+        }
     }
 }
