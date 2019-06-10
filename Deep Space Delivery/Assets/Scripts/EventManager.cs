@@ -12,6 +12,10 @@ public class EventManager : MonoBehaviour
     // Use this for initialization
     [SerializeField] private GameObject laserZoneMG;
     private LaserZone laserZone;
+    [SerializeField] private GameObject missileZoneMG;
+    private MissileZone missileZone;
+    [SerializeField] private GameObject sodaZoneMG;
+    private SodaZone sodaZone;
 
     private MyTuple AsteroidEvent;
     private MyTuple CaffeineEvent;
@@ -32,6 +36,8 @@ public class EventManager : MonoBehaviour
 
         this.eventList = new MyTuple[] { AsteroidEvent, this.CaffeineEvent, this.SpaceMonsterEvent, this.PowerOuttageEvent };
         laserZone = laserZoneMG.GetComponent<LaserZone>();
+        missileZone = missileZoneMG.GetComponent<MissileZone>();
+        sodaZone = sodaZoneMG.GetComponent<SodaZone>();
     }
 
     // Update is called once per frame

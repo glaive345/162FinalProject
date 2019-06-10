@@ -32,6 +32,8 @@ public class MissileZone : MonoBehaviour
     private GameObject empty;
 
     private bool eventActivated;
+    private EventManager eventManager;
+    [SerializeField] private GameObject UIScript;
 
 
     void Start()
@@ -54,6 +56,8 @@ public class MissileZone : MonoBehaviour
 
 
         this.displayPanel.SetActive(false);
+
+        eventManager = UIScript.GetComponent<EventManager>();
     }
 
     private void Update()
@@ -265,5 +269,9 @@ public class MissileZone : MonoBehaviour
                 standardShaderMaterial.renderQueue = 3000;
                 break;
         }
+    }
+    public void setActiveEvent(bool setEvent)//string if more than one event
+    {
+        this.eventActivated = setEvent;
     }
 }

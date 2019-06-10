@@ -26,6 +26,8 @@ public class SodaZone : MonoBehaviour
     private GameObject sodaCan;
 
     private bool eventActivated;
+    private EventManager eventManager;
+    [SerializeField] private GameObject UIScript;
 
     void Start()
     {
@@ -39,6 +41,8 @@ public class SodaZone : MonoBehaviour
         sodaCan = this.displayPanel.transform.GetChild(2).gameObject;
 
         this.displayPanel.SetActive(false);
+
+        eventManager = UIScript.GetComponent<EventManager>();
     }
 
     private void OnTriggerStay(Collider other)
@@ -110,5 +114,9 @@ public class SodaZone : MonoBehaviour
 
             //NEED TO SEND EARLY EXIT TO SUBSCRIBERS
         }
+    }
+    public void setActiveEvent(bool setEvent)//string if more than one event
+    {
+        this.eventActivated = setEvent;
     }
 }

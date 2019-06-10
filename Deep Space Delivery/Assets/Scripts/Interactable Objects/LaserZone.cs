@@ -9,7 +9,6 @@ public class LaserZone : MonoBehaviour
     [SerializeField] private GameObject laserPrefab;
     [SerializeField] private GameObject gun;
     [SerializeField] private GameObject coolDownBar;
-    [SerializeField] private GameObject UIScript;
 
     private int remainingTargets;
     private float dtime;
@@ -24,7 +23,7 @@ public class LaserZone : MonoBehaviour
 
     private bool eventActivated;
     private EventManager eventManager;
-
+    [SerializeField] private GameObject UIScript;
 
     //ADD OTHER VARIABLES HERE
 
