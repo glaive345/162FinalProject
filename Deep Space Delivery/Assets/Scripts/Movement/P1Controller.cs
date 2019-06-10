@@ -6,10 +6,14 @@ public class P1Controller : MonoBehaviour
 {
     private IPlayerCommand idle;
 
+    [SerializeField] private float speedMultiplierDecay;
+    private float speedMultiplier;
+
 
     void Start()
     {
         this.idle = ScriptableObject.CreateInstance<PlayerIdle>();
+        speedMultiplier = 1;
     }
 
     void Update()
@@ -25,7 +29,7 @@ public class P1Controller : MonoBehaviour
             var directionY = -Input.GetAxis("Vertical1");
 
             var degree = UnityEngine.Mathf.Rad2Deg * UnityEngine.Mathf.Atan2(directionY, directionX);
-            var speed = Mathf.Sqrt(directionX * directionX + directionY * directionY);
+            var speed = Mathf.Sqrt(directionX * directionX + directionY * directionY) * speedMultiplier;
             this.gameObject.transform.rotation = Quaternion.Euler(degree, 90, 270);
             this.gameObject.GetComponent<Animator>().speed = speed;
             if (gameObject.transform.GetChild(2).gameObject.activeSelf)
@@ -37,5 +41,17 @@ public class P1Controller : MonoBehaviour
                 this.gameObject.GetComponent<Animator>().Play("HumanoidRun");
             }
         }
+        if(speedMultiplier > 1)
+        {
+            speedMultiplier -= speedMultiplierDecay * Time.deltaTime;
+            if(speedMultiplier < 1)
+            {
+                speedMultiplier = 1;
+            }
+        }
+    }
+    public void changeSpeed(float multiplier)
+    {
+        speedMultiplier = multiplier;
     }
 }

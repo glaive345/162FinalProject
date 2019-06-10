@@ -13,15 +13,19 @@ public class SodaZone : MonoBehaviour
     //ADD OTHER VARIABLES HERE
 
     [SerializeField] private float speedBoostMultiplier;
-    [SerializeField] private float stepSpeed;
-    [SerializeField] private float shakeThreshold;
     [SerializeField] private float shakeSpeedMultiplier;
+    [SerializeField] private float canCooldown;
 
     [SerializeField] private Text cansDrunkText;
+    [SerializeField] private Text cooldownTimerText;
+    [SerializeField] private Text UIVendingText;
 
-    private float shakeAmount;
+    [SerializeField] private GameObject player1;
+    [SerializeField] private GameObject player2;
+
     private float cansDrunk;
     private int eventCansDrunk;
+    private float cooldownTimer;
 
     private GameObject track;
     private GameObject sodaCan;
@@ -37,6 +41,7 @@ public class SodaZone : MonoBehaviour
 
         //PREINITIALIZE VARIABLES HERE
         cansDrunk = 0;
+        cooldownTimer = 0;
 
         track = this.displayPanel.transform.GetChild(1).gameObject;
         sodaCan = this.displayPanel.transform.GetChild(2).gameObject;
@@ -47,12 +52,33 @@ public class SodaZone : MonoBehaviour
         eventCansDrunk = 0;
     }
 
+    private void Update()
+    {
+        cooldownTimer -= Time.deltaTime;
+        if(cooldownTimer > 0)
+        {
+            UIVendingText.text = "Vending Machine: Not Ready";
+        }
+        else
+        {
+            UIVendingText.text = "Vending Machine: Ready";
+        }
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (gameActivated)
         {
-            sodaCan.transform.Rotate(new Vector3(0, 25, 10));
-            track.transform.localScale = new Vector3(track.transform.localScale.x, track.transform.localScale.y + shakeSpeedMultiplier * Time.deltaTime, track.transform.localScale.z);
+            if(cooldownTimer <= 0)
+            {
+                cooldownTimerText.text = "";
+                sodaCan.transform.Rotate(new Vector3(0, 25, 10));
+                track.transform.localScale = new Vector3(track.transform.localScale.x, track.transform.localScale.y + shakeSpeedMultiplier * Time.deltaTime, track.transform.localScale.z);
+            }
+            else
+            {
+                cooldownTimerText.text = cooldownTimer.ToString("F");
+            }
         }
         //If player1 or player 2 interacts
         if ((other.gameObject.name == "Player1" && Input.GetButtonDown("Utility1")) || (other.gameObject.name == "Player2" && Input.GetButtonDown("Utility2")))
@@ -80,11 +106,19 @@ public class SodaZone : MonoBehaviour
                 }
             }
             //Progresses game if player who initiated it interacts
-            else if (currentPlayer == other.gameObject.name)
+            else if (currentPlayer == other.gameObject.name && cooldownTimer <= 0)
             {
-                //Playing Game
-                //ADD ON-INTERACT EFFECT HERE
                 cansDrunk++;
+                cooldownTimer = canCooldown;
+                var speed = speedBoostMultiplier * track.transform.localScale.y / 250;
+                if(currentPlayer == "Player1")
+                {
+                    player1.GetComponent<P1Controller>().changeSpeed(speed);
+                }
+                else if(currentPlayer == "Player2")
+                {
+                    player2.GetComponent<P2Controller>().changeSpeed(speed);
+                }
                 if (eventActivated)
                 {
                     eventCansDrunk++;
