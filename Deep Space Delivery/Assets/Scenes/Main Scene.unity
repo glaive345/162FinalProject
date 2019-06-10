@@ -20074,7 +20074,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010805769224, guid: 686fd8e833c62714e8d90ea73c3873e2, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4000010805769224, guid: 686fd8e833c62714e8d90ea73c3873e2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -22229,6 +22229,7 @@ MonoBehaviour:
   targetSpeedMultiplier: 120
   reloadSpeedMultiplier: 50
   targetEraticness: 0.05
+  UIScript: {fileID: 1432694989}
 --- !u!65 &891010018
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23371,7 +23372,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010805769224, guid: 686fd8e833c62714e8d90ea73c3873e2, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4000010805769224, guid: 686fd8e833c62714e8d90ea73c3873e2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -29624,7 +29625,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010805769224, guid: 686fd8e833c62714e8d90ea73c3873e2, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4000010805769224, guid: 686fd8e833c62714e8d90ea73c3873e2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -30137,7 +30138,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010805769224, guid: 686fd8e833c62714e8d90ea73c3873e2, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4000010805769224, guid: 686fd8e833c62714e8d90ea73c3873e2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -30814,7 +30815,7 @@ GameObject:
   - component: {fileID: 1371367248}
   - component: {fileID: 1371367247}
   m_Layer: 0
-  m_Name: New Text
+  m_Name: PauseText
   m_TagString: Paused
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31373,6 +31374,8 @@ GameObject:
   - component: {fileID: 1432694991}
   - component: {fileID: 1432694992}
   - component: {fileID: 1432694993}
+  - component: {fileID: 1432694994}
+  - component: {fileID: 1432694995}
   m_Layer: 5
   m_Name: Scripts
   m_TagString: Untagged
@@ -31446,6 +31449,34 @@ MonoBehaviour:
   UIShipTracker: {fileID: 497786415}
   maximumThrust: 0
   skyboxRotationMultiplier: 0
+--- !u!114 &1432694994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1432694989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 233e04ae0609243a6bc272123d4c884d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laserZoneMG: {fileID: 1693822873}
+  missileZoneMG: {fileID: 891010014}
+  sodaZoneMG: {fileID: 2046422600}
+--- !u!114 &1432694995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1432694989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d61411e6f188043b1abc32a763ae593d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseObjects: []
 --- !u!1 &1435646854 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100008, guid: cfef738579cd02c40b3b1d63e67b0f84,
@@ -33486,6 +33517,7 @@ MonoBehaviour:
   gun: {fileID: 2141362154}
   coolDownBar: {fileID: 1045084017}
   Damage: 0
+  UIScript: {fileID: 1432694989}
 --- !u!65 &1693822877
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -33573,7 +33605,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010805769224, guid: 686fd8e833c62714e8d90ea73c3873e2, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4000010805769224, guid: 686fd8e833c62714e8d90ea73c3873e2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -40665,6 +40697,7 @@ MonoBehaviour:
   shakeThreshold: 1
   shakeSpeedMultiplier: 50
   cansDrunkText: {fileID: 1493574620}
+  UIScript: {fileID: 1432694989}
 --- !u!1 &2048394256
 GameObject:
   m_ObjectHideFlags: 0

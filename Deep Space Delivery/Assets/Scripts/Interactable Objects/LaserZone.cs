@@ -23,6 +23,7 @@ public class LaserZone : MonoBehaviour
 
     private bool eventActivated;
     private EventManager eventManager;
+    private int numTargetRequired;
     [SerializeField] private GameObject UIScript;
 
     //ADD OTHER VARIABLES HERE
@@ -39,6 +40,7 @@ public class LaserZone : MonoBehaviour
         this.prevTime = 0;
         this.coolingDown = false;
         this.eventActivated = false;
+        this.numTargetRequired = 7;
 
         //PREINITIALIZE VARIABLES HERE
         this.displayPanel.SetActive(false);
@@ -77,6 +79,12 @@ public class LaserZone : MonoBehaviour
             this.createTarget();
             this.dtime = Random.Range(0.0f, 1.0f);
             this.remainingTargets--;
+            this.numTargetRequired--;
+        }
+        if (this.numTargetRequired == 0)
+        {
+            this.numTargetRequired = 7;
+            this.eventManager.returnFunction("laser");
         }
 
         if ((other.gameObject.name == "Player1" && Input.GetButtonDown("Utility1"))

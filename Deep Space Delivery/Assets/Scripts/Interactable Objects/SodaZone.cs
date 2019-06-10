@@ -21,6 +21,7 @@ public class SodaZone : MonoBehaviour
 
     private float shakeAmount;
     private float cansDrunk;
+    private int eventCansDrunk;
 
     private GameObject track;
     private GameObject sodaCan;
@@ -43,6 +44,7 @@ public class SodaZone : MonoBehaviour
         this.displayPanel.SetActive(false);
 
         eventManager = UIScript.GetComponent<EventManager>();
+        eventCansDrunk = 0;
     }
 
     private void OnTriggerStay(Collider other)
@@ -83,6 +85,15 @@ public class SodaZone : MonoBehaviour
                 //Playing Game
                 //ADD ON-INTERACT EFFECT HERE
                 cansDrunk++;
+                if (eventActivated)
+                {
+                    eventCansDrunk++;
+                    if(eventCansDrunk == 10)
+                    {
+                        this.eventManager.returnFunction("soda");
+                        eventCansDrunk = 0;
+                    }
+                }
                 cansDrunkText.text = "Cans Drunk: " + cansDrunk;
 
                 track.transform.localScale = new Vector3(track.transform.localScale.x, 0, track.transform.localScale.z);

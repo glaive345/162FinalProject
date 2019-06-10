@@ -30,6 +30,7 @@ public class MissileZone : MonoBehaviour
     private GameObject target;
     private GameObject ammo;
     private GameObject empty;
+    private int ammoshot;
 
     private bool eventActivated;
     private EventManager eventManager;
@@ -44,6 +45,7 @@ public class MissileZone : MonoBehaviour
         //PREINITIALIZE VARIABLES HERE
         maxAmmo = 4;
         currentAmmo = 0;
+        this.ammoshot = 0;
 
         targetGoingUp = true;
 
@@ -183,7 +185,12 @@ public class MissileZone : MonoBehaviour
                 if (lockOnBar.transform.localScale.y > 250)
                 {
                     currentAmmo--;
-
+                    ammoshot++;
+                    if(ammoshot == 3)
+                    {
+                        this.eventManager.returnFunction("missile");
+                        ammoshot = 0;
+                    }
                     //Changing material from opaque to fade
                     var ammoMaterial = ammo.transform.GetChild(currentAmmo).gameObject.GetComponent<Renderer>().material;
                     var UIAmmoMaterial = UIAmmo.transform.GetChild(currentAmmo).gameObject.GetComponent<Renderer>().material;

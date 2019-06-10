@@ -60,16 +60,13 @@ public class EventManager : MonoBehaviour
             switch (num)
             {
                 case 0:
-                    //if ship is running low on shield when time limit ends, deals damage
-                    //if laser game is completed, this.eventlist[num[.Item1 = falase, item2 =0.0f;
+                    this.laserZone.setActiveEvent(true);
                     break;
                 case 1:
-                    //if soda machine minigame is not finished, slows down the player. after 10 seconds,
-                    //player movement is slowed down by 50%.
-                    //if played
+                    this.sodaZone.setActiveEvent(true);
                     break;
                 case 2:
-                    //same with Asteroid Event
+                    this.missileZone.setActiveEvent(true);
                     break;
                 case 3:
                     //"disables" all the minigames for 3 secons?
@@ -95,9 +92,20 @@ public class EventManager : MonoBehaviour
         }//close foreach
         return;
     }
-    public void returnFunction(bool missionCompleted)
+    public void returnFunction(string minigameName)
     {
-        this.eventList[1].Item1 = missionCompleted;
+        switch (minigameName)
+        {
+            case "laser":
+                this.eventList[0].Item1 = false;
+                break;
+            case "missile":
+                this.eventList[0].Item1 = false;
+                break;
+            case "soda":
+                this.eventList[0].Item1 = false;
+                break;
+        }
     }
 }
 
