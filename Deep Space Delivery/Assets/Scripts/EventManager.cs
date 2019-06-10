@@ -10,9 +10,8 @@ public class EventManager : MonoBehaviour
     private float time;
     System.Random random = new System.Random();
     // Use this for initialization
-
-    [SerializeField] private GameObject UIScripts;
-    private LaserZone LaserZone;
+    [SerializeField] private GameObject laserZoneMG;
+    private LaserZone laserZone;
 
     private MyTuple AsteroidEvent;
     private MyTuple CaffeineEvent;
@@ -32,6 +31,7 @@ public class EventManager : MonoBehaviour
         this.PowerOuttageEvent = new MyTuple(false, 0.0f);
 
         this.eventList = new MyTuple[] { AsteroidEvent, this.CaffeineEvent, this.SpaceMonsterEvent, this.PowerOuttageEvent };
+        laserZone = laserZoneMG.GetComponent<LaserZone>();
     }
 
     // Update is called once per frame
@@ -88,6 +88,10 @@ public class EventManager : MonoBehaviour
             }
         }//close foreach
         return;
+    }
+    public void returnFunction(bool missionCompleted)
+    {
+        this.eventList[1].Item1 = missionCompleted;
     }
 }
 

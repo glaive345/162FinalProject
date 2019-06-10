@@ -12,7 +12,7 @@ public class UI_Pause : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1;
-        pauseObjects = GameObject.FindGameObjectsWithTag("ShowOnPause");
+        pauseObjects = GameObject.FindGameObjectsWithTag("Paused");
         hidePaused();
 
     }

@@ -9,6 +9,7 @@ public class LaserZone : MonoBehaviour
     [SerializeField] private GameObject laserPrefab;
     [SerializeField] private GameObject gun;
     [SerializeField] private GameObject coolDownBar;
+    [SerializeField] private GameObject UIScript;
 
     private int remainingTargets;
     private float dtime;
@@ -22,6 +23,8 @@ public class LaserZone : MonoBehaviour
     private bool coolingDown;
 
     private bool eventActivated;
+    private EventManager eventManager;
+
 
     //ADD OTHER VARIABLES HERE
 
@@ -40,6 +43,8 @@ public class LaserZone : MonoBehaviour
 
         //PREINITIALIZE VARIABLES HERE
         this.displayPanel.SetActive(false);
+
+        eventManager = UIScript.GetComponent<EventManager>();
     }
 
     void Update()
@@ -174,5 +179,10 @@ public class LaserZone : MonoBehaviour
 
             //NEED TO SEND EARLY EXIT TO SUBSCRIBERS
         }
+    }
+
+    public void setActiveEvent(bool setEvent)//string if more than one event
+    {
+        this.eventActivated = setEvent;
     }
 }
