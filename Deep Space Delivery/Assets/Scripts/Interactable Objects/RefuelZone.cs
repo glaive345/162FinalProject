@@ -28,9 +28,9 @@ public class RefuelZone : MonoBehaviour
     [SerializeField] private float fuelDrainMultiplier;
     [SerializeField] private float mainEngineDrainMultiplier;
 
-    private bool mainActive;
-    private bool topActive;
-    private bool botActive;
+    public bool mainActive;
+    public bool topActive;
+    public bool botActive;
 
     void Start()
     {

@@ -402,6 +402,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Untitled.stl
       objectReference: {fileID: 0}
+    - target: {fileID: -9089377553551209113, guid: 515b5a9f6f61379479b767ee2673979f,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 07b9684e49aab4347bcee582b5175f69, type: 2}
     - target: {fileID: -4216859302048453862, guid: 515b5a9f6f61379479b767ee2673979f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -415,7 +420,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 515b5a9f6f61379479b767ee2673979f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 515b5a9f6f61379479b767ee2673979f,
         type: 3}
@@ -826,7 +831,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 747e8ff5e5be44543a6f8c3d3bd0d5b2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -19853,6 +19858,9 @@ MonoBehaviour:
   barrelDrainMultiplier: 7.5
   fuelDrainMultiplier: 2.25
   mainEngineDrainMultiplier: 1.5
+  mainActive: 0
+  topActive: 0
+  botActive: 0
 --- !u!1 &628562692
 GameObject:
   m_ObjectHideFlags: 0
@@ -31594,6 +31602,7 @@ MonoBehaviour:
   UISpeed: {fileID: 1998820072}
   UIDistance: {fileID: 351815914}
   UIShipTracker: {fileID: 497786415}
+  refuelZoneGame: {fileID: 0}
   maximumThrust: 0
   skyboxRotationMultiplier: 0
 --- !u!114 &1432694994

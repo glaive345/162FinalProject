@@ -9,8 +9,12 @@ public class UI_Speed : MonoBehaviour
     [SerializeField] private Text UIDistance;
     [SerializeField] private GameObject UIShipTracker;
 
+    [SerializeField] private GameObject refuelZoneGame;
+    private RefuelZone refuelZone;
+
     [SerializeField] private float maximumThrust;
     private float currentEngineThrust;
+    private float currentEngineThrustExternal;
 
     [SerializeField] private float skyboxRotationMultiplier;
 
@@ -18,6 +22,7 @@ public class UI_Speed : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        refuelZone = refuelZoneGame.GetComponent<RefuelZone>();
         currentEngineThrust = maximumThrust;
     }
 
@@ -25,11 +30,12 @@ public class UI_Speed : MonoBehaviour
     void Update()
     {
         //NEEDS WORK
+
     }
 
     public void changeThrust(float thrustChange)
     {
-        currentEngineThrust += thrustChange;
+        currentEngineThrustExternal += thrustChange;
     }
 
     public void zeroThrust()
