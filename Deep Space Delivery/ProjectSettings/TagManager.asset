@@ -8,6 +8,7 @@ TagManager:
   - Target
   - Boundary
   - Laser
+  - Paused
   layers:
   - Default
   - TransparentFX

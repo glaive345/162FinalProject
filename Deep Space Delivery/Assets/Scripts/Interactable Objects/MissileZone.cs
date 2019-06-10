@@ -31,6 +31,8 @@ public class MissileZone : MonoBehaviour
     private GameObject ammo;
     private GameObject empty;
 
+    private bool eventActivated;
+
 
     void Start()
     {

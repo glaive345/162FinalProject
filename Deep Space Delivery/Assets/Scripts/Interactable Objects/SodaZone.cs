@@ -25,6 +25,8 @@ public class SodaZone : MonoBehaviour
     private GameObject track;
     private GameObject sodaCan;
 
+    private bool eventActivated;
+
     void Start()
     {
         this.gameActivated = false;
