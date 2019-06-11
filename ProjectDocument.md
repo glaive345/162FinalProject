@@ -3,6 +3,8 @@
 
 Life is tough for a Deep Space Delivery Man. Try to reach your destination as your ship gets bombarded by asteroids, your computer is flooded with viruses, and worst of all, you are running low on soda. This is a two player co-op game where cooperation is essential for dealing with all of the emergencies that come your way. 
 
+Start the game from the main menu scene.
+
 ## Gameplay explanation ##
 #### Basic controls: 
 Player 1 moves with the WASD keys, and uses the F button for commands. 
