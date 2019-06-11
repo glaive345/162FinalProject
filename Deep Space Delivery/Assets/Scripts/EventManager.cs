@@ -58,7 +58,7 @@ public class EventManager : MonoBehaviour
     void Update()
     {
         time = time+Time.deltaTime;
-        if (time > 5.00f)//every 10 seconds
+        if (time > 2.00f)//every 15 seconds
         {
             eventAssignment();
             incrementTime();
@@ -156,7 +156,7 @@ public class EventManager : MonoBehaviour
                 AlertText.text = "You are un-caffeinated. Go get some soda";
                 break;
             case "missile":
-                AlertText.text = "Asteroid approaching. Use missiles to shoot it dowm";
+                AlertText.text = "Asteroid approaching. Use missiles to shoot it down";
                 break;
             case "laser":
                 AlertText.text = "You're bored. Like REALLY bored. play the laser game";
