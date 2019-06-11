@@ -121,10 +121,11 @@ https://freesound.org/people/Robotter112/sounds/418988/
 https://freesound.org/people/cmusounddesign/sounds/84710/
 https://assetstore.unity.com/packages/audio/sound-fx/weapons/ultra-sci-fi-game-audio-weapons-pack-vol-1-113047
 https://assetstore.unity.com/packages/audio/sound-fx/sci-fi-sfx-32830
+<br/>
 Music<br/>
 https://www.newgrounds.com/audio/listen/464352
 https://assetstore.unity.com/packages/audio/music/electronic/sci-fi-music-loops-pack-120186
-
+<br/>
 The audio was implemented through a single audio source as the main camera was held still. The different minigames would play certain sounds when they got to certain parts of the script. The background music was chosen to try to keep a high intensity and frentic feel to the game.
 
 ## Gameplay Testing
