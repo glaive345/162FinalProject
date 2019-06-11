@@ -2,14 +2,49 @@
 
 ## Summary ##
 
-**A paragraph-length pitch for your game.**
+Life is tough for a Deep Space Delivery Man. Try to reach your destination as your ship gets bombarded by asteroids, flooded with viruses, and worst of all, runs out of soda. This is a two player co-op game where cooperation is essential for dealing with all of the emergencies that come your way. 
 
 ## Gameplay explanation ##
 
 **In this section, explain how the game should be played. Treat this like a manual within a game. It is encouraged to explain the button mappings and the most optimal gameplay strategy.**
+Basic controls: Player 1 moves with the WASD keys, and uses the X button for commands. Player 2 moves with the IJKL keys, and uses the M button for commands. Minigames are activated by pressing your Command button on a designated pressure plate. 
+
+The amount of minigames and what they do might be a little overwhelming at first, but hopefully this explanation will make everything a little bit more intuitive. 
+
+#### Minigame 1: Refueling Game
+This minigame is found at the leftmost part of the map. The goal of this minigame is to refuel your ship. As time passes, your ship speed (as shown in the upper left corner), will decrease. Refueling your ship will keep the ship going. 
+
+The three bars represent your ships three fuel tanks. If even one is empty, the ship stops moving. Hold down the Command button to refuel and watch your fuel gauge increase. 
+
+#### Minigame 2: Missile Game
+This minigame is found in the left-bottom corner of the map. Occasionally, an asteroid will appear, indicated by the message, "Asteroid approaching. Use missiles to shoot it down!". The goal of this minigame is to destroy the asteroids and keep your ship healthy.
+
+Keep the yellow cursor on top of the red target. Once the bar to the right fills up, the asteroid will be destroyed. Be mindful of your Missile Count, which is shown on the bottom-left UI panel. This Missile Count will regenerate over time, and you will not be able to shoot asteroids if the count is 0. 
+
+#### Minigame 3: Shields Game
+This minigame is found in the middle-bottom corner of the map. The goal of this minigame is to replenish your Shields meter, which is shown on the bottom-left UI panel. Over time, this meter will decrease gradually, making your ship take more damage from asteroids.  
+
+Hold the Command Button to fill the middle bar. The longer your hold it, the more your Shields will be replenished. If you time your release correctly and align the moving red bar with the green diamond, you will gain 5 times the amount of Shields. 
+
+#### Minigame 4: Laser Game
+This minigame is found in the middle-top corner of the map. The goal of this minigame is to believe boredom, which occasionally appears as an emergency. 
+
+Press the Command Button to shoot lasers, and try to delete the asteroids on the screen. You cannot continue firing if the red bar on the bottom fills up, indicating that your lasers are currently overheated. 
+
+#### Minigame 5: Virus Game
+This minigame is found in the rightmost side of the map. Occasionally, the ship will be infested with viruses, which will severaly slow the ship down. The goal of this minigame is to take care of this emergency. 
+
+Press the Command Button to delete a pop-up window. Mash until all the windows are closed. 
 
 
+#### Minigame 6: Refueling Oil Barrel Count
+This action can be done in front of the two green barrels on the map. In order the refuel your ship, you must bring oil barrels to the Refueling game.
 
+Press the Command Button to let your player carry an oil barrel. Now, navigate your character to the Refueling game. Use your command button adjust the angle of the black barrel on the screen. Be careful, as if the black barrel reaches 90 degrees, the barrel will spill, and you will have to start all over again. 
+
+#### Minigame 7: Soda
+This minigame is found in the upper-right corner of the map. Soda increases your players speed, which can be extremely valuable. 
+To play, wait for the bar in the middle to fill up. The more it is filled up, the more speed boost your player will get. 
 
 # Main Roles #
 
