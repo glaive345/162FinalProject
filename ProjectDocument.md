@@ -101,12 +101,15 @@ More specifically, in EventManager, we have a list of tuples containing the name
 **Document the sound style.**
 
 ## Gameplay Testing
-
-**Add a link to the full results of your gameplay tests.**
+**Add a link to the full results of your gameplay tests.**<br/>
+Full result is included in the git repository under UserTesting.csv.
 
 **Summarize the key findings from your gameplay tests.**
-
-
+Some key findings are as follows<br/>
+-Too much elements are going at the same time without any prior notice/instructions on how to deal with them.<br/>
+-Objective of the game is unclear and some users thought the objective of the games were based on the minigames, not reachign the destination<br/>
+-There are lack of instructions in the beginning and too much minigames to keep track of <br/>
+-not enough visual indicators that actually tell what needs to be done and what has happened so far.<br/>
 
 ## Narrative Design
 **Document how the narrative is present in the game via assets, gameplay systems, and gameplay.**<br/>
@@ -119,7 +122,7 @@ The story is that these guys are lowly space delivery men. They are not paid wel
 [Trailer](https://youtu.be/24c4bITD9aY)
 
 **Describe how you showcased your work. How did you choose what to show in the trailer? Why did you choose your screenshots?**<br/>
-Our Press Kit and Trailer highlights exciting gameplay, and iconic moments, like different minigames and even starting the game and viewing the main menu. 
+Our Press Kit and Trailer highlights different gameplay portions, and iconic moments, like different minigames and even starting the game and viewing the main menu.
 
 
 ## Game Feel
