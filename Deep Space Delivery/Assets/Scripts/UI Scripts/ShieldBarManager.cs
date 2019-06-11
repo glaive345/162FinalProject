@@ -11,12 +11,15 @@ public class ShieldBarManager : MonoBehaviour
     private float maxShield;
     private Vector3 shieldCenter;
 
+    public bool shieldActive;
+
     // Start is called before the first frame update
     void Start()
     {
         currentChangePercent = 0;
         maxShield = shieldBar.transform.localScale.x;
         shieldCenter = shieldBar.transform.localPosition;
+        shieldActive = true;
     }
 
     // Update is called once per frame
@@ -42,6 +45,16 @@ public class ShieldBarManager : MonoBehaviour
             shieldBar.transform.localPosition = new Vector3(shieldCenter.x - maxShield / 2, shieldBar.transform.localPosition.y, shieldBar.transform.localPosition.z);
         }
         currentChangePercent = 0;
+
+        //Sets public variable
+        if(shieldBar.transform.localScale.x > 10)
+        {
+            shieldActive = true;
+        }
+        else
+        {
+            shieldActive = false;
+        }
     }
 
     public void changeBar(float percent)
