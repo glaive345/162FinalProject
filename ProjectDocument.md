@@ -92,6 +92,8 @@ Player1 uses  WASD to navigate and X to interact with stations. Player 2 uses IJ
 
 More specifically, in EventManager, we have a list of tuples containing the name of a minigame and how long they have been active. Then, it generates a random minigame that is not active. Minigames signal when they are complete through the function ReturnFunction(stringMinigameName), which tells the manager to pop it out of the list. [This](https://github.com/glaive345/162FinalProject/blob/b9bdf6aef0ac79e108247b580c18e960e27de9d4/Deep%20Space%20Delivery/Assets/Scripts/EventManager.cs#L32) is a link to the EventManager's eventList, a list of 'tuples', which the EventManager uses to keep track of states of events.
 
+Other than the EventManager, there is light work around the Main Menu, Pause Menu, and Game Over screen (not been fully implemented) based on using serialize fields and gameobject componenets to hide/show/activate the different UI elements as well as scenes.
+
 
 # Sub-Roles
 ## Audio
