@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UI_Speed : MonoBehaviour
 {
     [SerializeField] private Text UISpeed;
+    [SerializeField] private Text UIMaxSpeed;
     [SerializeField] private Text UIDistance;
     [SerializeField] private GameObject UIShipTracker;
     private float distanceNeeded;
@@ -18,6 +19,8 @@ public class UI_Speed : MonoBehaviour
     [SerializeField] private float maximumThrust;
     private float currentEngineThrust;
     private float currentEngineThrustExternal;
+    private float currentBridge;
+    private float currentRadar;
 
     private bool mainCurrent;
     private bool topCurrent;
@@ -35,6 +38,9 @@ public class UI_Speed : MonoBehaviour
     {
         refuelZone = refuelZoneGame.GetComponent<RefuelZone>();
         currentEngineThrust = 0;
+        currentEngineThrustExternal = 1;
+        currentBridge = 1;
+        currentRadar = 1;
         distanceNeeded = 5000;
         distanceRemaining = 5000;
 
@@ -101,30 +107,32 @@ public class UI_Speed : MonoBehaviour
         }
 
         //If above current max speed
-        if(currentEngineThrust > currentMaxSpeedMultiplier)
+        if(currentEngineThrust > currentMaxSpeedMultiplier * currentEngineThrustExternal)
         {
             currentEngineThrust -= thrustDecay * Time.deltaTime;
             //If overshot
-            if(currentEngineThrust < currentMaxSpeedMultiplier)
+            if(currentEngineThrust < currentMaxSpeedMultiplier * currentEngineThrustExternal)
             {
                 currentEngineThrust = currentMaxSpeedMultiplier;
             }
         }
         //If below current max speed
-        if(currentEngineThrust < currentMaxSpeedMultiplier)
+        if(currentEngineThrust < currentMaxSpeedMultiplier * currentEngineThrustExternal)
         {
             currentEngineThrust += thrustDecay * Time.deltaTime;
             //If overshot
-            if (currentEngineThrust > currentMaxSpeedMultiplier)
+            if (currentEngineThrust > currentMaxSpeedMultiplier * currentEngineThrustExternal)
             {
                 currentEngineThrust = currentMaxSpeedMultiplier;
             }
         }
 
+        //Displays Max Speed
+        UIMaxSpeed.text = "Max: " + (maximumThrust * currentMaxSpeedMultiplier * currentEngineThrustExternal).ToString("F");
         //Displays current speed
         UISpeed.text = "Speed: " + (maximumThrust * currentEngineThrust).ToString("F") + " AU/sec";
         //Updates Distance
-        distanceRemaining -= maximumThrust * currentMaxSpeedMultiplier * Time.deltaTime;
+        distanceRemaining -= maximumThrust * currentEngineThrust * Time.deltaTime;
         if(distanceRemaining < 0)
         {
             UIDistance.text = "Location Reached: Freeplay Mode\n " +  (-distanceRemaining).ToString("F");
@@ -152,9 +160,21 @@ public class UI_Speed : MonoBehaviour
         RenderSettings.skybox.SetFloat("_Rotation", currentRotation);
     }
 
-    public void changeThrustExternal(float thrustChange)
+    //Combines both influences from bridge and radar
+    private void changeThrustExternal(float bridgeThrust, float radarThrust)
     {
-        currentEngineThrustExternal += thrustChange;
+        currentEngineThrustExternal = .5f + bridgeThrust * .25f + radarThrust * .25f;
+    }
+
+    public void changeThrustBridge(float thrustChange)
+    {
+        currentBridge = thrustChange;
+        changeThrustExternal(currentBridge, currentRadar);
+    }
+    public void changeThrustRadar(float thrustChange)
+    {
+        currentRadar = thrustChange;
+        changeThrustExternal(currentBridge, currentRadar);
     }
 
     public void zeroThrust()

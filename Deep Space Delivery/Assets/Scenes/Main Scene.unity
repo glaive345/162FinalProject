@@ -486,6 +486,85 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1257329347}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &44456788
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 44456789}
+  - component: {fileID: 44456791}
+  - component: {fileID: 44456790}
+  m_Layer: 5
+  m_Name: Max
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &44456789
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44456788}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1628682618}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -125, y: 40}
+  m_SizeDelta: {x: 200, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &44456790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44456788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.9926069, g: 1, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 40
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 3
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Max:'
+--- !u!222 &44456791
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44456788}
+  m_CullTransparentMesh: 0
 --- !u!1001 &52192708
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -541,7 +620,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 515b5a9f6f61379479b767ee2673979f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 515b5a9f6f61379479b767ee2673979f,
         type: 3}
@@ -757,7 +836,7 @@ RectTransform:
   m_LocalScale: {x: 450, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 1628682618}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -12923,7 +13002,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1628682618}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -23353,10 +23432,11 @@ MonoBehaviour:
   displayPanel: {fileID: 924088568}
   warningWindowPrefab: {fileID: 4426033181011605606, guid: 58b4474811ab84db681b519cdf7bbdcf,
     type: 3}
-  throttleReset: 10
-  minSpawn: 5
+  throttleReset: 9
+  minSpawn: 10
   maxSpawn: 15
   UIText: {fileID: 1969572833}
+  UIScripts: {fileID: 1432694989}
   mainAudio: {fileID: 530768210}
   mouseAudio: {fileID: 8300000, guid: 7bcf71c1a68274e4cbddfdee01cc9598, type: 3}
 --- !u!65 &984847697
@@ -36519,6 +36599,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UISpeed: {fileID: 1998820072}
+  UIMaxSpeed: {fileID: 44456790}
   UIDistance: {fileID: 351815914}
   UIShipTracker: {fileID: 497786415}
   refuelZoneGame: {fileID: 611563634}
@@ -37586,7 +37667,8 @@ MonoBehaviour:
   nextScanTime: 10
   minSpawn: 3
   maxSpawn: 8
-  currentScanTime: 5
+  currentScanTime: 4
+  UIScripts: {fileID: 1432694989}
 --- !u!4 &1580039364 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4703808066476440, guid: c893785d2f3b0d94c9ada72216a168ec,
@@ -38022,6 +38104,7 @@ RectTransform:
   m_Children:
   - {fileID: 2114541825}
   - {fileID: 1998820071}
+  - {fileID: 44456789}
   - {fileID: 351815913}
   - {fileID: 71540512}
   - {fileID: 497786416}

@@ -41,6 +41,9 @@ public class RadarZone : MonoBehaviour
     [SerializeField] private float currentScanTime;
     private float currentTimer;
 
+    [SerializeField] private GameObject UIScripts;
+    private UI_Speed uiSpeed;
+
 
     void Start()
     {
@@ -67,6 +70,8 @@ public class RadarZone : MonoBehaviour
         randomAmount = 0;
         numberGuessed = 0;
 
+        uiSpeed = UIScripts.GetComponent<UI_Speed>();
+
         scansLeftText.text = "0";
 
         this.displayPanel.SetActive(false);
@@ -83,12 +88,15 @@ public class RadarZone : MonoBehaviour
                 scansCompleted.SetActive(false);
             }
             numberOfScansLeft++;
+            this.changeSpeed();
             scansLeftText.text = numberOfScansLeft.ToString();
             nextScanTimer = 0;
         }
 
         this.updateUI();
         this.updateBars();
+
+
     }
 
 
@@ -106,6 +114,7 @@ public class RadarZone : MonoBehaviour
                         check.SetActive(true);
                         cross.SetActive(false);
                         numberOfScansLeft--;
+                        this.changeSpeed();
                         scansLeftText.text = numberOfScansLeft.ToString();
                         if (numberOfScansLeft == 0)
                         {
@@ -255,5 +264,15 @@ public class RadarZone : MonoBehaviour
         nextScanBar.transform.localScale = new Vector3(nextScanPercent * 200, nextScanBar.transform.localScale.y, nextScanBar.transform.localScale.z);
         nextScanBar.transform.localPosition = new Vector3(nextScanBarPos + nextScanPercent * 100, nextScanBar.transform.localPosition.y, nextScanBar.transform.localPosition.z);
         scanTimeBar.transform.localScale = new Vector3(currentScanPercent * 200, scanTimeBar.transform.localScale.y, scanTimeBar.transform.localScale.z);
+    }
+
+    private void changeSpeed()
+    {
+        var outVar = 1f - numberOfScansLeft / 10f;
+        if(outVar < 0)
+        {
+            outVar = 0;
+        }
+        uiSpeed.changeThrustRadar(outVar);
     }
 }

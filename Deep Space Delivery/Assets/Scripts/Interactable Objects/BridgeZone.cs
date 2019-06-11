@@ -15,6 +15,9 @@ public class BridgeZone : MonoBehaviour
     [SerializeField] private int maxSpawn;
     [SerializeField] private UnityEngine.UI.Text UIText;
 
+    [SerializeField] private GameObject UIScripts;
+    private UI_Speed uiSpeed;
+
     private bool gameActivated;
     private string currentPlayer;
     // current number of window being displayed
@@ -34,6 +37,7 @@ public class BridgeZone : MonoBehaviour
         this.throttle = throttleReset;
         this.remainingWindows = 0;
 
+        uiSpeed = UIScripts.GetComponent<UI_Speed>();
     }
 
     void Update()
@@ -48,6 +52,7 @@ public class BridgeZone : MonoBehaviour
                 this.remainingWindows++;
             }
             this.systemHealth -= randDamage;
+            uiSpeed.changeThrustBridge(systemHealth / 100f);
             this.throttle = throttleReset;
         }
         if(remainingWindows > 0)
@@ -107,6 +112,8 @@ public class BridgeZone : MonoBehaviour
                 mainAudio.PlayOneShot(mouseAudio);
                 this.systemHealth++;
                 this.remainingWindows--;
+                uiSpeed.changeThrustBridge(systemHealth / 100f);
+
             }
         }
     }
