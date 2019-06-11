@@ -7,9 +7,10 @@ Start the game from the main menu scene.
 
 ## Gameplay explanation ##
 #### Basic controls: 
-Player 1 moves with the WASD keys, and uses the F button for commands. 
-Player 2 moves with the IJKL keys, and uses the H button for commands. 
-Minigames are activated and played using only the Command button. 
+Player 1 moves with the WASD keys, and uses the F button for commands. <br/>
+Player 2 moves with the IJKL keys, and uses the H button for commands. <br/>
+Minigames are activated and played using only your Command button. <br/>
+Pause the game using the ESC button <br/>
 
 The amount of minigames and what they do might be a little overwhelming at first, but hopefully this explanation will make everything a little bit more intuitive. 
 
@@ -122,10 +123,14 @@ The audio was implemented through a single audio source as the main camera was h
 
 ## Gameplay Testing
 
-**Add a link to the full results of your gameplay tests.**
+Full result is included in the git repository under UserTesting.csv.<br/>
 
-**Summarize the key findings from your gameplay tests.**
 
+Some key findings are as follows<br/>
+-Too much elements are going at the same time without any prior notice/instructions on how to deal with them.<br/>
+-Objective of the game is unclear and some users thought the objective of the games were based on the minigames, not reachign the destination<br/>
+-There are lack of instructions in the beginning and too much minigames to keep track of <br/>
+-not enough visual indicators that actually tell what needs to be done and what has happened so far.<br/>
 
 
 ## Narrative Design
