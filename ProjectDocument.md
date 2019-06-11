@@ -61,20 +61,18 @@ Here is an example:
 You should replay any **bold text** with your own relevant information. Liberally use the template when necessary and appropriate.
 
 ## User Interface
-**Describe your user interface and how it relates to gameplay. This can be done via the template.**<br/>
 The UI in this game gives the user a clear overview of the status of the ship. We have a Time panel which displays the ship's progress towards its destination, an Alerts panel that displays any incoming emergencies, and more. 
 
-*Observer Pattern* - Most of the UI in this game plays off of an observer pattern. For example, the Shields minigame publishes data to   the ShieldBarManager. The ShieldBarManager is watched by the UI, and updates to the Shield meter in this way. You can see how the ShieldBarManager informs the UI here: [ShieldBarManager](https://github.com/ensemble-ai/exercise3-observer-aakim-git/blob/f7ef943fc7e1065ccbbe69e48951def135f9ef36/Pikmini/Assets/Scripts/ColorWatcher.cs#L18). The Shields minigame publishes information through the changeBar() function. 
+*Observer Pattern* - Most of the UI in this game plays off of an observer pattern. For example, the Shields minigame publishes data to   the ShieldBarManager. The ShieldBarManager is watched by the UI, and updates to the Shield meter in this way. You can see how the ShieldBarManager informs the UI here: [ShieldBarManager](https://github.com/glaive345/162FinalProject/blob/7aedb5356aa1619ed8ca9e6dd5ec28e5be099e25/Deep%20Space%20Delivery/Assets/Scripts/UI%20Scripts/ShieldBarManager.cs#L7) (shieldBar is the UI element displaying the shield meter). The Shields minigame publishes information through the changeBar() function. 
 
 
 
 ## Movement/Physics
-**Describe the basics of movement and physics in your game. Is it the standard physics model? What did you change or modify? Did you make your own movement scripts that do not use the phyics system?**<br/>
 There are number of different movement and physics systems in this game, implemented in the different minigames and the players. 
 
-*Lerp* - A number of objects make use of lerp. For example, the asteroid uses lerp to head towards the ship. Or the barrel in Minigame 6 uses lerp to accelerate to 90 degrees, as to imitate real life and gravity. [Lerp](https://github.com/ensemble-ai/exercise3-observer-aakim-git/blob/f7ef943fc7e1065ccbbe69e48951def135f9ef36/Pikmini/Assets/Scripts/ColorWatcher.cs#L18). The Shields minigame publishes information through the changeBar() function. 
+*Lerp* - A number of objects make use of lerp. For example, the asteroid uses lerp to head towards the ship. Or the barrel in Minigame 6 uses lerp to accelerate to 90 degrees, as to imitate real life and gravity. [Lerp](https://github.com/glaive345/162FinalProject/blob/b9bdf6aef0ac79e108247b580c18e960e27de9d4/Deep%20Space%20Delivery/Assets/Scripts/Interactable%20Objects/MissileZone.cs#L112).
 
-Some minigames use eccentric movement systems, like in the Shields game. There is a red bar which must move around a circular meter. We do this using the function RotateAround(). [Circular Motion](https://github.com/ensemble-ai/exercise3-observer-aakim-git/blob/f7ef943fc7e1065ccbbe69e48951def135f9ef36/Pikmini/Assets/Scripts/ColorWatcher.cs#L18). The Shields minigame publishes information through the changeBar() function. 
+Some minigames use eccentric movement systems, like in the Shields game. There is a red bar which must move around a circular meter. We do this using the function RotateAround(). [Circular Motion](https://github.com/glaive345/162FinalProject/blob/b9bdf6aef0ac79e108247b580c18e960e27de9d4/Deep%20Space%20Delivery/Assets/Scripts/Interactable%20Objects/ShieldZone.cs#L55). 
 
 ## Animation and Visuals
 **List your assets including their sources, and licenses.**<br/>
@@ -83,7 +81,6 @@ Some minigames use eccentric movement systems, like in the Shields game. There i
 The visuals obviously play off a space theme. 
 
 ## Input
-**Describe the default input configuration.**<br/>
 Player1 uses  WASD to navigate and X to interact with stations. Player 2 uses IJKL to navigate and M to interact with stations.<br/>
 
 *Command Pattern* - The players' movement scripts are encapsulated using the command pattern interface. During update of the PlayerController script, the binded key strokes would invoke the execute function in the movement script and trigger the players' gameobjects to move accordingly. Using the Command Pattern makes it easier to call the desired function without needing the information of exact class names. It also makes it so that the controller script doesn't have to fix the specific keys, and that the players of the game can select their own key bindings. [The command interface](https://github.com/glaive345/162FinalProject/blob/master/Deep%20Space%20Delivery/Assets/Scripts/Movement/IPlayerCommand.cs).
@@ -92,7 +89,7 @@ Player1 uses  WASD to navigate and X to interact with stations. Player 2 uses IJ
 **Document what game states and game data you managed and what design patterns you used to complete your task.**<br/>
 *Observer Pattern* - The game is centered around a Observer / Watcher design pattern. The UI watches and receives updates from the minigames. And in turn, the minigames watch the EventManager, who keeps track of which minigames are active and their states (such as GameActive, which indicates if a player is currently playing a minigame and EventActive, which indicates if an emergency has been initiated), and generates events accordingly. 
 
-More specifically, in EventManager, we have a list of tuples containing the name of a minigame and how long they have been active. Then, it generates a random minigame that is not active. Minigames signal when they are complete through the function ReturnFunction(stringMinigameName), which tells the manager to pop it out of the list. 
+More specifically, in EventManager, we have a list of tuples containing the name of a minigame and how long they have been active. Then, it generates a random minigame that is not active. Minigames signal when they are complete through the function ReturnFunction(stringMinigameName), which tells the manager to pop it out of the list. [This](https://github.com/glaive345/162FinalProject/blob/b9bdf6aef0ac79e108247b580c18e960e27de9d4/Deep%20Space%20Delivery/Assets/Scripts/EventManager.cs#L32) is a link to the EventManager's eventList, a list of 'tuples', which the EventManager frequency modifies. 
 
 
 # Sub-Roles
