@@ -26,7 +26,9 @@ public class UI_Speed : MonoBehaviour
     [SerializeField] private ParticleSystem mainEngineParticle;
     [SerializeField] private ParticleSystem topEngineParticle;
     [SerializeField] private ParticleSystem botEngineParticle;
+
     [SerializeField] private float skyboxRotationMultiplier;
+    private float currentRotation;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +41,8 @@ public class UI_Speed : MonoBehaviour
         mainCurrent = true;
         topCurrent = true;
         botCurrent = true;
+
+        currentRotation = 0;
     }
 
     // Update is called once per frame
@@ -144,7 +148,8 @@ public class UI_Speed : MonoBehaviour
 
 
         //Changes skybox rotation speed
-        RenderSettings.skybox.SetFloat("_Rotation", Time.time * skyboxRotationMultiplier * currentEngineThrust);
+        currentRotation += Time.deltaTime * skyboxRotationMultiplier * currentEngineThrust;
+        RenderSettings.skybox.SetFloat("_Rotation", currentRotation);
     }
 
     public void changeThrustExternal(float thrustChange)
