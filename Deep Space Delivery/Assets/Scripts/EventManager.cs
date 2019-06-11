@@ -58,10 +58,11 @@ public class EventManager : MonoBehaviour
     void Update()
     {
         time = time+Time.deltaTime;
-        if (time % 5.0f < 0.01)//every 10 seconds
+        if (time > 5.00f)//every 10 seconds
         {
             eventAssignment();
             incrementTime();
+            time = 0.0f;
         }
     }
 
@@ -90,6 +91,7 @@ public class EventManager : MonoBehaviour
                     this.sodaZone.setActiveEvent(true);
                     p1Controller.changeSpeed(.5f);
                     p2Controller.changeSpeed(.5f);
+                    Debug.Log("slowdown");
                     this.updateAlerts("soda");
                     break;
                 case 2:
@@ -113,7 +115,7 @@ public class EventManager : MonoBehaviour
             {
                 i.Item2 = i.Item2 + Time.deltaTime;
             }//close if
-            if (i.Item2 == this.TIMELIMIT)
+            if (i.Item2 > this.TIMELIMIT)
             {
                 i.Item1 = false;
                 //some failure statement
@@ -137,6 +139,8 @@ public class EventManager : MonoBehaviour
                 break;
             case "soda":
                 this.eventList[0].Item1 = false;
+                p1Controller.changeSpeed(1.0f);
+                p2Controller.changeSpeed(1.0f);
                 this.currentEvents.Remove(2);
                 break;
         }
