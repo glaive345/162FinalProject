@@ -15,15 +15,11 @@ public class UI_MainMenu : MonoBehaviour
     //Credits
     void Start()
     {
-        menuObjects = GameObject.FindGameObjectsWithTag("MainMenu");
-        directionText = GameObject.FindGameObjectsWithTag("Direction");
-        creditText = GameObject.FindGameObjectsWithTag("Credit");
-        backButton = GameObject.FindGameObjectsWithTag("backButton");
         showAll();
 
-        directionText.setActive(false);
-        backButton.setActive(false);
-        creditText.setActive(false);
+        directionText.SetActive(false);
+        backButton.SetActive(false);
+        creditText.SetActive(false);
 
     }
 
@@ -37,21 +33,21 @@ public class UI_MainMenu : MonoBehaviour
     public void showDirection()
     {
         hideAll();
-        directionText.setActive(true);
-        backButton.setActive(true);
+        directionText.SetActive(true);
+        backButton.SetActive(true);
     }
 
     public void showCredit()
     {
         hideAll();
-        creditText.setActive(true);
-        backButton.setActive(true);
+        creditText.SetActive(true);
+        backButton.SetActive(true);
     }
 
     public void back()
     {
-        directionText.setActive(false);
-        creditText.setActive(false);
+        directionText.SetActive(false);
+        creditText.SetActive(false);
         showAll();
     }
 
