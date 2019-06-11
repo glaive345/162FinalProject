@@ -8,8 +8,9 @@ public class BridgeZone : MonoBehaviour
     [SerializeField] private GameObject displayPanel;
     private List<GameObject> warningWindows = new List<GameObject>();
 
-    [SerializeField] private GameObject congratulations;
     [SerializeField] private GameObject warningWindowPrefab;
+
+    [SerializeField] private float throttleReset;
 
     private bool gameActivated;
     private string currentPlayer;
@@ -27,21 +28,9 @@ public class BridgeZone : MonoBehaviour
         this.gameActivated = false;
         this.currentPlayer = "None";
         this.systemHealth = 100;
-        this.throttle = Random.Range(0.0f, 10.0f);
+        this.throttle = throttleReset;
         this.remainingWindows = 0;
 
-        // for(int i = 0; i < 20; i++)
-        // {
-        //     this.warningWindows.Add(this.displayPanel.transform.GetChild(i).gameObject);
-        // }
-
-        // this.displayPanel.SetActive(false);
-        // this.warningWindows.ForEach(delegate (GameObject obj)
-        // {
-        //     obj.SetActive(false);
-        // });
-
-        // this.congratulations.SetActive(false);
     }
 
     void Update()
@@ -59,18 +48,13 @@ public class BridgeZone : MonoBehaviour
                 }
             }
             this.systemHealth -= randDamage;
-            this.throttle = Random.Range(0.0f, 10.0f);
+            this.throttle = throttleReset;
         }
-        // if (this.systemHealth != 100)
-        // {
-        //     Debug.Log(this.systemHealth);
-        // }
     }
 
     private void createWindow()
     {
-        GameObject tempWindow = Instantiate(
-            warningWindowPrefab, this.displayPanel.transform.position, this.displayPanel.transform.rotation);
+        GameObject tempWindow = Instantiate(warningWindowPrefab, this.displayPanel.transform.position, this.displayPanel.transform.rotation);
         tempWindow.GetComponent<RectTransform>().sizeDelta = new Vector2(175.34f, 56.91f);
         tempWindow.transform.SetParent(this.displayPanel.transform);
         tempWindow.GetComponent<RectTransform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
@@ -82,19 +66,13 @@ public class BridgeZone : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         //If player1 or player 2 interacts
-        if ((other.gameObject.name == "Player1" && Input.GetButtonDown("Utility1"))
-            || (other.gameObject.name == "Player2" && Input.GetButtonDown("Utility2")))
+        if ((other.gameObject.name == "Player1" && Input.GetButtonDown("Utility1")) || (other.gameObject.name == "Player2" && Input.GetButtonDown("Utility2")))
         {
             if (!this.gameActivated)
             {
                 // activating Game
                 this.displayPanel.SetActive(true);
-                var temp = 100 - this.systemHealth - this.remainingWindows;
-                for (var i = 0; i < temp; i++)
-                {
-                    this.createWindow();
-                    this.remainingWindows++;
-                }
+
 
                 //Setting Starting Player
                 this.gameActivated = true;
@@ -110,7 +88,7 @@ public class BridgeZone : MonoBehaviour
                     this.displayPanel.transform.localPosition = new Vector3(-734.5284f, 0, 0);
                 }
             }
-            else if (this.systemHealth < 100)
+            else if (currentPlayer == other.gameObject.name && this.systemHealth < 100)
             {
                 var lastChild = this.displayPanel.transform.GetChild(this.displayPanel.transform.childCount - 1);
                 // Debug.Log(lastChild);
@@ -119,25 +97,6 @@ public class BridgeZone : MonoBehaviour
                 this.systemHealth++;
                 this.remainingWindows--;
             }
-
-            //Progresses game if player who initiated it interacts
-            // else if(currentPlayer == other.gameObject.name)
-            // {
-            //     //Playing Game
-            //     if(remainingWindows > 0)
-            //     {
-            //         //Removes one window
-            //         this.remainingWindows--;
-            //         warningWindows[this.remainingWindows].SetActive(false);
-            //     }
-            //     else
-            //     {
-            //         //Game Completed
-            //         this.congratulations.SetActive(true);
-
-            //         //NEED TO SEND RESULTS TO SUBSCRIBERS
-            //     }
-            // }
         }
     }
 
@@ -151,16 +110,9 @@ public class BridgeZone : MonoBehaviour
             Debug.Log("game deactivated");
 
             this.displayPanel.SetActive(false);
-            // this.warningWindows.ForEach(delegate (GameObject obj)
-            // {
-            //     obj.SetActive(false);
-            // });
-            // this.remainingWindows = 0;
+
             currentPlayer = "None";
-
-            this.congratulations.SetActive(false);
-
-            //NEED TO SEND EARLY EXIT TO SUBSCRIBERS
+            
         }
     }
 }
