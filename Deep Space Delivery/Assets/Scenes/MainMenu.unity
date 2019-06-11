@@ -1160,9 +1160,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "Player 1:\nMove with the WASD keys. \nUse X for commands. \n\nPlayer 2:\nMove
-    with the IJKL keys. \nUse M for Commands\n\nKeep your ship alive and reach your
-    destination. \nGo bravely, into the darkness, like true delivery men!"
+  m_Text: "Player 1:\nMove with the WASD keys. \nUse F to interact with things. \n\nPlayer
+    2:\nMove with the IJKL keys. \nUse H to interact with things.\n\nKeep your ship
+    alive and reach your destination. \nGo bravely, into the darkness, like true delivery
+    men!"
 --- !u!222 &722633436
 CanvasRenderer:
   m_ObjectHideFlags: 0
