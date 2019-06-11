@@ -122,7 +122,7 @@ public class SodaZone : MonoBehaviour
                 if (eventActivated)
                 {
                     eventCansDrunk++;
-                    if(eventCansDrunk == 10)
+                    if(eventCansDrunk == 1)
                     {
                         this.eventManager.returnFunction("soda");
                         eventCansDrunk = 0;

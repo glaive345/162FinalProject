@@ -16,6 +16,13 @@ public class EventManager : MonoBehaviour
     private MissileZone missileZone;
     [SerializeField] private GameObject sodaZoneMG;
     private SodaZone sodaZone;
+    [SerializeField] private GameObject Player1;
+    private P1Controller p1Controller;
+    [SerializeField] private GameObject Player2;
+    private P2Controller p2Controller;
+    [SerializeField] private GameObject UIAlerts;
+    private Text AlertText;
+
 
     private MyTuple AsteroidEvent;
     private MyTuple CaffeineEvent;
@@ -38,6 +45,10 @@ public class EventManager : MonoBehaviour
         laserZone = laserZoneMG.GetComponent<LaserZone>();
         missileZone = missileZoneMG.GetComponent<MissileZone>();
         sodaZone = sodaZoneMG.GetComponent<SodaZone>();
+        p1Controller = Player1.GetComponent<P1Controller>();
+        p2Controller = Player2.GetComponent<P2Controller>();
+
+        AlertText = UIAlerts.transform.GetChild(1).GetComponent<Text>();
     }
 
     // Update is called once per frame
@@ -64,6 +75,8 @@ public class EventManager : MonoBehaviour
                     break;
                 case 1:
                     this.sodaZone.setActiveEvent(true);
+                    p1Controller.changeSpeed(.5f);
+                    p2Controller.changeSpeed(.5f);
                     break;
                 case 2:
                     this.missileZone.setActiveEvent(true);
@@ -104,6 +117,16 @@ public class EventManager : MonoBehaviour
                 break;
             case "soda":
                 this.eventList[0].Item1 = false;
+                break;
+        }
+    }
+
+    public void updateAlerts(string eventName)
+    {
+        switch (eventName)
+        {
+            case "soda":
+                AlertText.text = "You are un-caffeinated. Go get some soda";
                 break;
         }
     }
