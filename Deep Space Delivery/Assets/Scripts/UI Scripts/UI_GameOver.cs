@@ -7,13 +7,16 @@ using UnityEngine.SceneManagement;
 public class UI_GameOver : MonoBehaviour
 {
     [SerializeField] private GameObject[] GameOverObjects;
+    [SerializeField] private Button RestartButton;
+    [SerializeField] private Button MainMenuButton;
     // Start is called before the first frame update
     void Start()
     {
         Time.timeScale = 1;
         GameOverObjects = GameObject.FindGameObjectsWithTag("GameOver");
         hideGameOver();
-
+        this.RestartButton.onClick.AddListener(Restart);
+        this.MainMenuButton.onClick.AddListener(ToMain);
     }
 
     // Update is called once per frame
@@ -31,6 +34,8 @@ public class UI_GameOver : MonoBehaviour
         {
             i.SetActive(true);
         }
+        RestartButton.gameObject.SetActive(true);
+        MainMenuButton.gameObject.SetActive(true);
     }
 
     public void hideGameOver()
@@ -39,6 +44,8 @@ public class UI_GameOver : MonoBehaviour
         {
             i.SetActive(false);
         }
+        RestartButton.gameObject.SetActive(false);
+        MainMenuButton.gameObject.SetActive(false);
     }
 
     public void ToMain()

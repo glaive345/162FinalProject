@@ -9,6 +9,8 @@ TagManager:
   - Boundary
   - Laser
   - Paused
+  - laser
+  - GameOver
   layers:
   - Default
   - TransparentFX
