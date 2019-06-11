@@ -131,17 +131,20 @@ public class EventManager : MonoBehaviour
         {
             case "laser":
                 this.eventList[0].Item1 = false;
+                AlertText.text = "You're not bored anymore!";
                 this.currentEvents.Remove(0);
                 break;
             case "missile":
                 this.eventList[0].Item1 = false;
                 this.currentEvents.Remove(1);
+                AlertText.text = "Asteroid Destroyed!";
                 break;
             case "soda":
                 this.eventList[0].Item1 = false;
                 p1Controller.changeSpeed(1.0f);
                 p2Controller.changeSpeed(1.0f);
                 this.currentEvents.Remove(2);
+                AlertText.text = "Yay, caffeinated again!";
                 break;
         }
     }
