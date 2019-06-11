@@ -126,6 +126,7 @@ public class SodaZone : MonoBehaviour
                     {
                         this.eventManager.returnFunction("soda");
                         eventCansDrunk = 0;
+                        this.eventActivated = false;
                     }
                 }
                 cansDrunkText.text = "Cans Drunk: " + cansDrunk;
@@ -163,5 +164,6 @@ public class SodaZone : MonoBehaviour
     public void setActiveEvent(bool setEvent)//string if more than one event
     {
         this.eventActivated = setEvent;
+        this.eventManager.updateAlerts("soda");
     }
 }

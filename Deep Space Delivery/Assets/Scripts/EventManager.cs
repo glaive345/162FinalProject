@@ -72,7 +72,9 @@ public class EventManager : MonoBehaviour
         {
             num = random.Next(0, 3);
             this.currentEvents.Add(num);
+            Debug.Log(num);
         }
+        Debug.Log(num);
 
         if (this.eventList[num].Item1 != true)
         {
@@ -81,14 +83,18 @@ public class EventManager : MonoBehaviour
             {
                 case 0:
                     this.laserZone.setActiveEvent(true);
+
+                    this.updateAlerts("laser");
                     break;
                 case 1:
                     this.sodaZone.setActiveEvent(true);
                     p1Controller.changeSpeed(.5f);
                     p2Controller.changeSpeed(.5f);
+                    this.updateAlerts("soda");
                     break;
                 case 2:
                     this.missileZone.setActiveEvent(true);
+                    this.updateAlerts("missile");
                     break;
                 case 3:
                     //"disables" all the minigames for 3 secons?
@@ -142,6 +148,15 @@ public class EventManager : MonoBehaviour
         {
             case "soda":
                 AlertText.text = "You are un-caffeinated. Go get some soda";
+                break;
+            case "missile":
+                AlertText.text = "Asteroid approaching. Use missiles to shoot it dowm";
+                break;
+            case "laser":
+                AlertText.text = "You're bored. Like REALLY bored. play the laser game";
+                break;
+            case"clear":
+                AlertText.text = "";
                 break;
         }
     }
