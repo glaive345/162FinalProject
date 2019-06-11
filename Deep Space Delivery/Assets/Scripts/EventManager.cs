@@ -54,12 +54,14 @@ public class EventManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        time = Time.deltaTime;
-        if (time % 10.0f == 0)//every 10 seconds
+        time += Time.deltaTime;
+        if (time > 10.0f)
         {
+            Debug.Log("event started");
             eventAssignment();
-            incrementTime();
+            time = 0;
         }
+        incrementTime();
     }
 
     void eventAssignment()
