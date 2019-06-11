@@ -3,7 +3,15 @@ guid: 931c99de607d80046be004a5a949b6a8
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - displayPanel: {instanceID: 0}
+  - UIAmmo: {instanceID: 0}
+  - UIScript: {instanceID: 0}
+  - mainAudio: {instanceID: 0}
+  - lockSound: {instanceID: 0}
+  - missileFire: {instanceID: 0}
+  - Asteroid: {fileID: 1670538445574650, guid: c4cbe6c492f2da347a243c5d939e654f, type: 3}
+  - AsteroidExplosion: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

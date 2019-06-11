@@ -42,6 +42,13 @@ public class MissileZone : MonoBehaviour
     [SerializeField] private float lockOnAudioDelay;
     private float lockOnAudioTimer;
 
+    // asteroid stuff
+    [SerializeField] private GameObject Asteroid;
+    [SerializeField] private float astSpeed;
+    [SerializeField] private ParticleSystem AsteroidExplosion;
+    private Vector3 astStartPosition;
+    private Vector3 astEndPosition;
+    private float TimeElapsed;
 
     void Start()
     {
@@ -66,6 +73,9 @@ public class MissileZone : MonoBehaviour
         this.displayPanel.SetActive(false);
 
         eventManager = UIScript.GetComponent<EventManager>();
+        astStartPosition = new Vector3(40, 4, 10);
+        astEndPosition = new Vector3(25, 4, 10);
+        TimeElapsed = 0;
     }
 
     private void Update()
@@ -93,6 +103,15 @@ public class MissileZone : MonoBehaviour
                 reloadBar.transform.localScale = new Vector3(reloadBar.transform.localScale.x, 0, reloadBar.transform.localScale.z);
                 reloadBar.transform.localPosition = new Vector3(reloadBar.transform.localPosition.x, -125, reloadBar.transform.localPosition.z);
             }
+        }
+        
+        // Update Asteroid:
+        if (eventActivated)
+        {
+            Debug.Log("aaaaaa");
+            this.TimeElapsed += Time.deltaTime;
+            Asteroid.transform.position = Vector3.Lerp(astStartPosition, astEndPosition, this.TimeElapsed/this.astSpeed);
+            Asteroid.transform.Rotate(2, 2, 2, Space.Self);
         }
     }
 
@@ -199,11 +218,12 @@ public class MissileZone : MonoBehaviour
                     mainAudio.PlayOneShot(missileFire);
                     currentAmmo--;
                     ammoshot++;
-                    if(ammoshot == 3)
+                    if(ammoshot == 1)
                     {
+                        DestroyAsteroid();
+                        this.eventActivated = false;
                         this.eventManager.returnFunction("missile");
                         ammoshot = 0;
-                        this.eventActivated = false;
                     }
                     //Changing material from opaque to fade
                     var ammoMaterial = ammo.transform.GetChild(currentAmmo).gameObject.GetComponent<Renderer>().material;
@@ -291,10 +311,26 @@ public class MissileZone : MonoBehaviour
                 break;
         }
     }
-    public void setActiveEvent(bool setEvent)//string if more than one event
+    
+    public void setActiveEvent(bool setEvent)
     {
+        this.InitateAsteroid();
         this.eventActivated = setEvent;
-
         this.eventManager.updateAlerts("missile");
     }
+    
+    private void InitateAsteroid()
+    {
+        this.Asteroid.transform.gameObject.SetActive(true);
+        this.Asteroid.transform.position = this.astStartPosition;
+    }
+    
+    private void DestroyAsteroid()
+    {
+        this.AsteroidExplosion.transform.position = this.Asteroid.transform.position;
+        this.AsteroidExplosion.Play();
+        this.Asteroid.transform.position = this.astStartPosition;
+        this.Asteroid.transform.gameObject.SetActive(false);
+    }
+    
 }
