@@ -63,18 +63,25 @@ Here is an example:
 You should replay any **bold text** with your own relevant information. Liberally use the template when necessary and appropriate.
 
 ## User Interface
-
 **Describe your user interface and how it relates to gameplay. This can be done via the template.**
+The UI in this game gives the user a clear overview of the status of the ship. We have a Time panel which displays the ship's progress towards its destination, an Alerts panel that displays any incoming emergencies, and more. 
+
+*Observer Pattern* - [The example of the Observer pattern from class](https://github.com/ensemble-ai/exercise3-observer-aakim-git/blob/f7ef943fc7e1065ccbbe69e48951def135f9ef36/Pikmini/Assets/Scripts/ColorWatcher.cs#L18).
+
+
 
 ## Movement/Physics
-
 **Describe the basics of movement and physics in your game. Is it the standard physics model? What did you change or modify? Did you make your own movement scripts that do not use the phyics system?**
+There are number of different movement and physics systems in this game, implemented in the different minigames and the players. 
+
+*Lerp* - A number of objects make use of lerp. For example, the asteroid uses lerp to head towards the ship. Or the barrel in Minigame 6 uses lerp to accelerate to 90 degrees, as to imitate real life and gravity.
 
 ## Animation and Visuals
 
 **List your assets including their sources, and licenses.**
 
 **Describe how your work intersects with game feel, graphic design, and world-building. Include your visual style guide if one exists.**
+The visuals are obviously meant to give a space theme.
 
 ## Input
 
@@ -108,6 +115,7 @@ Player1 uses  WASD to navigate and X to interact with stations. Player 2 uses IJ
 ## Narrative Design
 
 **Document how the narrative is present in the game via assets, gameplay systems, and gameplay.**
+The story is that these guys are lowly space delivery men. They are not paid well, and so have to do with this bumbling, disorganized ship. We try to instill this narrative throughout the game. For example, you can see that the popups in the minigame are from Windows XP, the oil barrels are behind doors, and the door can only be opened with the help of another person. We are hoping it implies that this is a poorly managed and cheap ship.
 
 ## Press Kit and Trailer
 
