@@ -33797,6 +33797,8 @@ MonoBehaviour:
   coolDownBar: {fileID: 1045084017}
   Damage: 0
   UIScript: {fileID: 1432694989}
+  mainAudio: {fileID: 530768210}
+  laserAudio: {fileID: 8300000, guid: 9afd6cc7134a3428cb7606e918101f8f, type: 3}
 --- !u!65 &1693822877
 BoxCollider:
   m_ObjectHideFlags: 0
