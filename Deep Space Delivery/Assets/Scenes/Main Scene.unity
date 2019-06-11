@@ -36949,6 +36949,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameOverObjects: []
+  RestartButton: {fileID: 518479028}
+  MainMenuButton: {fileID: 338624917}
 --- !u!1 &1435646854 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100008, guid: cfef738579cd02c40b3b1d63e67b0f84,
