@@ -69,11 +69,13 @@ Player1 uses  WASD to navigate and X to interact with stations. Player 2 uses IJ
 
 ## Narrative Design
 
-**oDocument how the narrative is present in the game via assets, gameplay systems, and gameplay.**
+**Document how the narrative is present in the game via assets, gameplay systems, and gameplay.**
 
 ## Press Kit and Trailer
 
 **Include links to your presskit materials and trailer.**
+
+https://youtu.be/24c4bITD9aY
 
 **Describe how you showcased your work. How did you choose what to show in the trailer? Why did you choose your screenshots?**
 
