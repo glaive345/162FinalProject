@@ -85,6 +85,7 @@ public class LaserZone : MonoBehaviour
         {
             this.numTargetRequired = 7;
             this.eventManager.returnFunction("laser");
+            this.eventActivated = false;
         }
 
         if ((other.gameObject.name == "Player1" && Input.GetButtonDown("Utility1"))
@@ -191,5 +192,7 @@ public class LaserZone : MonoBehaviour
     public void setActiveEvent(bool setEvent)//string if more than one event
     {
         this.eventActivated = setEvent;
+
+        this.eventManager.updateAlerts("laser");
     }
 }

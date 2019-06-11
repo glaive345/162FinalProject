@@ -203,6 +203,7 @@ public class MissileZone : MonoBehaviour
                     {
                         this.eventManager.returnFunction("missile");
                         ammoshot = 0;
+                        this.eventActivated = false;
                     }
                     //Changing material from opaque to fade
                     var ammoMaterial = ammo.transform.GetChild(currentAmmo).gameObject.GetComponent<Renderer>().material;
@@ -293,5 +294,7 @@ public class MissileZone : MonoBehaviour
     public void setActiveEvent(bool setEvent)//string if more than one event
     {
         this.eventActivated = setEvent;
+
+        this.eventManager.updateAlerts("missile");
     }
 }
