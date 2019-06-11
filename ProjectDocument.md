@@ -119,9 +119,10 @@ The story is that these guys are lowly space delivery men. They are not paid wel
 
 ## Press Kit and Trailer
 
-**Include links to your presskit materials and trailer.**
+[Press Kit](https://github.com/aakim-git/PDFs/blob/master/Press%20Kit.pdf).
+[Trailer](https://youtu.be/24c4bITD9aY).
 
-https://youtu.be/24c4bITD9aY
+
 
 **Describe how you showcased your work. How did you choose what to show in the trailer? Why did you choose your screenshots?**
 
