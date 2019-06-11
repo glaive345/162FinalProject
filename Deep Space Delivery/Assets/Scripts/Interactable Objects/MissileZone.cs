@@ -108,7 +108,6 @@ public class MissileZone : MonoBehaviour
         // Update Asteroid:
         if (eventActivated)
         {
-            Debug.Log("aaaaaa");
             this.TimeElapsed += Time.deltaTime;
             Asteroid.transform.position = Vector3.Lerp(astStartPosition, astEndPosition, this.TimeElapsed/this.astSpeed);
             Asteroid.transform.Rotate(2, 2, 2, Space.Self);
