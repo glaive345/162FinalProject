@@ -7,7 +7,10 @@ Life is tough for a Deep Space Delivery Man. Try to reach your destination as yo
 ## Gameplay explanation ##
 
 **In this section, explain how the game should be played. Treat this like a manual within a game. It is encouraged to explain the button mappings and the most optimal gameplay strategy.**
-Basic controls: Player 1 moves with the WASD keys, and uses the X button for commands. Player 2 moves with the IJKL keys, and uses the M button for commands. Minigames are activated by pressing your Command button on a designated pressure plate. 
+#### Basic controls: 
+Player 1 moves with the WASD keys, and uses the X button for commands. 
+Player 2 moves with the IJKL keys, and uses the M button for commands. 
+Minigames are activated and played using your Command button. 
 
 The amount of minigames and what they do might be a little overwhelming at first, but hopefully this explanation will make everything a little bit more intuitive. 
 
