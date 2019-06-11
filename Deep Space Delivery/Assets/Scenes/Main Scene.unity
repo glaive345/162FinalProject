@@ -19917,6 +19917,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayPanel: {fileID: 1655983991}
+  UIText: {fileID: 1719093394}
   refuelRateMultiplier: 35
   barrelDrainMultiplier: 15
   fuelDrainMultiplier: 2.5
@@ -23398,7 +23399,10 @@ MonoBehaviour:
   displayPanel: {fileID: 924088568}
   warningWindowPrefab: {fileID: 4426033181011605606, guid: 58b4474811ab84db681b519cdf7bbdcf,
     type: 3}
-  throttleReset: 3
+  throttleReset: 10
+  minSpawn: 5
+  maxSpawn: 15
+  UIText: {fileID: 1969572833}
   mainAudio: {fileID: 530768210}
   mouseAudio: {fileID: 8300000, guid: 7bcf71c1a68274e4cbddfdee01cc9598, type: 3}
 --- !u!65 &984847697
@@ -36546,6 +36550,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shieldBar: {fileID: 202784929}
   naturalDecay: 0.5
+  UIText: {fileID: 1379656863}
   shieldActive: 0
 --- !u!114 &1432694993
 MonoBehaviour:
