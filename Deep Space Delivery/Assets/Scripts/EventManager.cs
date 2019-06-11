@@ -58,7 +58,7 @@ public class EventManager : MonoBehaviour
     void Update()
     {
         time = time+Time.deltaTime;
-        if (time > 2.00f)//every 15 seconds
+        if (time > 15.00f)//every 15 seconds
         {
             eventAssignment();
             incrementTime();
