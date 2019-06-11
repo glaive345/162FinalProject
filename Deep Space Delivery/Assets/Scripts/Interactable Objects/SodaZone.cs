@@ -76,7 +76,16 @@ public class SodaZone : MonoBehaviour
             {
                 cooldownTimerText.text = "";
                 sodaCan.transform.Rotate(new Vector3(0, 25, 10));
-                track.transform.localScale = new Vector3(track.transform.localScale.x, track.transform.localScale.y + shakeSpeedMultiplier * Time.deltaTime, track.transform.localScale.z);
+                if(track.transform.localScale.y + shakeSpeedMultiplier * Time.deltaTime < 250)
+                {
+                    track.transform.localScale = new Vector3(track.transform.localScale.x, track.transform.localScale.y + shakeSpeedMultiplier * Time.deltaTime, track.transform.localScale.z);
+
+                }
+                else
+                {
+                    track.transform.localScale = new Vector3(track.transform.localScale.x, 250, track.transform.localScale.z);
+
+                }
             }
             else
             {

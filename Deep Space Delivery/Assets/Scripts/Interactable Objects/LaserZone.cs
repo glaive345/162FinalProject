@@ -9,6 +9,10 @@ public class LaserZone : MonoBehaviour
     [SerializeField] private GameObject laserPrefab;
     [SerializeField] private GameObject gun;
     [SerializeField] private GameObject coolDownBar;
+    [SerializeField] private GameObject laserFire;
+    private bool startTimer;
+    private float laserPropTimer;
+    [SerializeField] private float laserLifetime;
 
     private int remainingTargets;
     private float dtime;
@@ -44,6 +48,9 @@ public class LaserZone : MonoBehaviour
         this.coolingDown = false;
         this.eventActivated = false;
         this.numTargetRequired = 7;
+        this.laserFire.SetActive(false);
+        this.startTimer = false;
+        this.laserPropTimer = 0;
 
         //PREINITIALIZE VARIABLES HERE
         this.displayPanel.SetActive(false);
@@ -53,6 +60,21 @@ public class LaserZone : MonoBehaviour
 
     void Update()
     {
+        if (this.laserFire.activeSelf)
+        {
+            startTimer = true;
+        }
+        if (startTimer)
+        {
+            laserPropTimer += Time.deltaTime;
+            if(laserPropTimer > laserLifetime)
+            {
+                startTimer = false;
+                laserPropTimer = 0;
+                this.laserFire.SetActive(false);
+            }
+        }
+
         if (this.heat > 0)
         {
             this.heat -= Time.deltaTime * 10;
@@ -125,6 +147,7 @@ public class LaserZone : MonoBehaviour
                 //Playing Game
                 //ADD ON-INTERACT EFFECT HERE
                 this.createLaser();
+                this.laserFire.SetActive(true);
                 mainAudio.PlayOneShot(laserAudio);
 
                 if (this.prevTime != 0)
