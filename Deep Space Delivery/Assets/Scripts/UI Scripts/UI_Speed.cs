@@ -127,7 +127,7 @@ public class UI_Speed : MonoBehaviour
         distanceRemaining -= maximumThrust * currentMaxSpeedMultiplier * Time.deltaTime;
         if(distanceRemaining < 0)
         {
-            UIDistance.text = "Location Reached";
+            UIDistance.text = "Location Reached: Freeplay Mode\n " +  (-distanceRemaining).ToString("F");
             //ADD ON REACHED EFFECTS
             //ADD RESET TIMER FOR NEXT LOCATION
         }

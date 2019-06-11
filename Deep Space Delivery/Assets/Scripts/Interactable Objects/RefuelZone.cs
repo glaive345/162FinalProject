@@ -45,7 +45,7 @@ public class RefuelZone : MonoBehaviour
         this.currentPlayer = "None";
 
         //PREINITIALIZE VARIABLES HERE
-        barrelCount = 3;
+        barrelCount = 0;
         fuelPointingTo = 0;
 
         barrel = this.displayPanel.transform.GetChild(2).gameObject;
