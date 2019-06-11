@@ -41220,6 +41220,8 @@ MonoBehaviour:
   player1: {fileID: 2109387057}
   player2: {fileID: 2062510015}
   UIScript: {fileID: 1432694989}
+  mainAudio: {fileID: 530768210}
+  canOpenAudio: {fileID: 8300000, guid: 01d5835ea10800a4c8c719fea9e58036, type: 3}
 --- !u!1 &2048394256
 GameObject:
   m_ObjectHideFlags: 0
