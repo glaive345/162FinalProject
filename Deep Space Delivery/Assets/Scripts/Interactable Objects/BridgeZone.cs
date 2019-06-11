@@ -18,6 +18,9 @@ public class BridgeZone : MonoBehaviour
     private float throttle;
     private int remainingWindows;
 
+    [SerializeField] private AudioSource mainAudio;
+    [SerializeField] private AudioClip mouseAudio;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -112,6 +115,7 @@ public class BridgeZone : MonoBehaviour
                 var lastChild = this.displayPanel.transform.GetChild(this.displayPanel.transform.childCount - 1);
                 // Debug.Log(lastChild);
                 Destroy(lastChild.gameObject);
+                mainAudio.PlayOneShot(mouseAudio);
                 this.systemHealth++;
                 this.remainingWindows--;
             }

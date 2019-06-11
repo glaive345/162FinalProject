@@ -30,6 +30,9 @@ public class CarryZone : MonoBehaviour
     [SerializeField] private GameObject carryBarrel1;
     [SerializeField] private GameObject carryBarrel2;
 
+    [SerializeField] private AudioSource mainAudio;
+    [SerializeField] private AudioClip liftAudio;
+    [SerializeField] private AudioClip spillAudio;
 
     void Start()
     {
@@ -62,6 +65,7 @@ public class CarryZone : MonoBehaviour
                 //On first frame of spill
                 if(spillSustainTimer == 0)
                 {
+                    mainAudio.PlayOneShot(spillAudio);
                     spilledText.GetComponent<UnityEngine.UI.Text>().text = "Spilled";
                     //Immediately remove barrel, preventing drop off
                     if (currentPlayer == "Player1")
@@ -158,6 +162,8 @@ public class CarryZone : MonoBehaviour
                 spill = false;
                 spillSustainTimer = 0;
                 timer = 0;
+
+                mainAudio.PlayOneShot(liftAudio);
 
                 barrelProp.SetActive(false);
 

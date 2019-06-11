@@ -27,6 +27,10 @@ public class ShieldZone : MonoBehaviour
     [SerializeField] private GameObject UIScripts;
     private ShieldBarManager shieldBarManager;
 
+    [SerializeField] private AudioSource mainAudio;
+    [SerializeField] private AudioClip shieldChargingAudio;
+    [SerializeField] private AudioClip bonusChargeAudio;
+
     void Start()
     {
         this.gameActivated = false;
@@ -110,20 +114,24 @@ public class ShieldZone : MonoBehaviour
             //Lose charge or input charge
             beginDecay = false;
             var savedCharge = chargeBar.transform.localScale.y / 150;
-            chargeBar.transform.localScale = new Vector3(chargeBar.transform.localScale.x, 0, chargeBar.transform.localScale.z);
-
-            //Check if released near green diamond for bonus charge, else regular charge
-            if (Mathf.Abs(rotateBar.transform.localRotation.z) < highChargeLeniency)
+            if(savedCharge > 0.1)
             {
-                savedCharge = savedCharge * highChargeMaximum;
-            }
-            else
-            {
-                savedCharge = savedCharge * lowChargeMaximum;
-            }
+                mainAudio.PlayOneShot(shieldChargingAudio);
+                chargeBar.transform.localScale = new Vector3(chargeBar.transform.localScale.x, 0, chargeBar.transform.localScale.z);
+                //Check if released near green diamond for bonus charge, else regular charge
+                if (Mathf.Abs(rotateBar.transform.localRotation.z) < highChargeLeniency)
+                {
+                    savedCharge = savedCharge * highChargeMaximum;
+                    mainAudio.PlayOneShot(bonusChargeAudio);
+                }
+                else
+                {
+                    savedCharge = savedCharge * lowChargeMaximum;
+                }
 
-            shieldBarManager.changeBar(savedCharge);
-            //SEND TO SUBSCRIBERS RESULT
+                shieldBarManager.changeBar(savedCharge);
+                //SEND TO SUBSCRIBERS RESULT
+            }
         }
     }
 

@@ -1372,6 +1372,9 @@ MonoBehaviour:
   respawnTime: 25
   carryBarrel1: {fileID: 568486048}
   carryBarrel2: {fileID: 1315659241}
+  mainAudio: {fileID: 530768210}
+  liftAudio: {fileID: 8300000, guid: 612bd550164400544bff8d53fd791d3a, type: 3}
+  spillAudio: {fileID: 8300000, guid: 2808fec17d1e66f4da62b89659fa5729, type: 3}
 --- !u!1 &186867519
 GameObject:
   m_ObjectHideFlags: 0
@@ -6832,6 +6835,9 @@ MonoBehaviour:
   respawnTime: 25
   carryBarrel1: {fileID: 568486048}
   carryBarrel2: {fileID: 1315659241}
+  mainAudio: {fileID: 530768210}
+  liftAudio: {fileID: 8300000, guid: 612bd550164400544bff8d53fd791d3a, type: 3}
+  spillAudio: {fileID: 8300000, guid: 2808fec17d1e66f4da62b89659fa5729, type: 3}
 --- !u!4 &219369076 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 473198, guid: c70dd99c5cd1cbf4c9b8f226c3284b85,
@@ -21350,6 +21356,9 @@ MonoBehaviour:
   chargeRateMulitplier: 200
   decayRateMultiplier: 2
   UIScripts: {fileID: 1432694989}
+  mainAudio: {fileID: 530768210}
+  shieldChargingAudio: {fileID: 8300000, guid: 9cc99277f231e4adbbd91ff1821f526b, type: 3}
+  bonusChargeAudio: {fileID: 8300000, guid: b2204f47b903e413e8e8e442d60a8ca1, type: 3}
 --- !u!65 &771352253
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22349,6 +22358,10 @@ MonoBehaviour:
   reloadSpeedMultiplier: 50
   targetEraticness: 0.05
   UIScript: {fileID: 1432694989}
+  mainAudio: {fileID: 530768210}
+  lockSound: {fileID: 8300000, guid: 9ff2db4891587ce49ada9ceac801af8a, type: 3}
+  missileFire: {fileID: 8300000, guid: 053305631f13240d0a559a947fcefde4, type: 3}
+  lockOnAudioDelay: 1
 --- !u!65 &891010018
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23316,6 +23329,8 @@ MonoBehaviour:
   congratulations: {fileID: 321265960}
   warningWindowPrefab: {fileID: 4426033181011605606, guid: 58b4474811ab84db681b519cdf7bbdcf,
     type: 3}
+  mainAudio: {fileID: 530768210}
+  mouseAudio: {fileID: 8300000, guid: 7bcf71c1a68274e4cbddfdee01cc9598, type: 3}
 --- !u!65 &984847697
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -33790,6 +33805,8 @@ MonoBehaviour:
   coolDownBar: {fileID: 1045084017}
   Damage: 0
   UIScript: {fileID: 1432694989}
+  mainAudio: {fileID: 530768210}
+  laserAudio: {fileID: 8300000, guid: 9afd6cc7134a3428cb7606e918101f8f, type: 3}
 --- !u!65 &1693822877
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -41211,6 +41228,8 @@ MonoBehaviour:
   player1: {fileID: 2109387057}
   player2: {fileID: 2062510015}
   UIScript: {fileID: 1432694989}
+  mainAudio: {fileID: 530768210}
+  canOpenAudio: {fileID: 8300000, guid: 01d5835ea10800a4c8c719fea9e58036, type: 3}
 --- !u!1 &2048394256
 GameObject:
   m_ObjectHideFlags: 0

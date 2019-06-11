@@ -36,6 +36,12 @@ public class MissileZone : MonoBehaviour
     private EventManager eventManager;
     [SerializeField] private GameObject UIScript;
 
+    [SerializeField] private AudioSource mainAudio;
+    [SerializeField] private AudioClip lockSound;
+    [SerializeField] private AudioClip missileFire;
+    [SerializeField] private float lockOnAudioDelay;
+    private float lockOnAudioTimer;
+
 
     void Start()
     {
@@ -177,13 +183,20 @@ public class MissileZone : MonoBehaviour
         //Checks location of target and targeter for lock on
         if (gameActivated)
         {
+            lockOnAudioTimer += Time.deltaTime;
             var lockOnChange = lockOnSpeedMultiplier * Time.deltaTime;
             if(Mathf.Abs(targeter.transform.localPosition.y - target.transform.localPosition.y) < lockOnSensitivity && currentAmmo > 0)
             {
                 lockOnBar.transform.localScale = new Vector3(lockOnBar.transform.localScale.x, lockOnBar.transform.localScale.y + lockOnChange, lockOnBar.transform.localScale.z);
+                if (lockOnAudioTimer > lockOnAudioDelay)
+                {
+                    mainAudio.PlayOneShot(lockSound);
+                    lockOnAudioTimer = 0;
+                }
                 //Fire missile if locked on
                 if (lockOnBar.transform.localScale.y > 250)
                 {
+                    mainAudio.PlayOneShot(missileFire);
                     currentAmmo--;
                     ammoshot++;
                     if(ammoshot == 3)

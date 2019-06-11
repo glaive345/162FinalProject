@@ -34,6 +34,9 @@ public class SodaZone : MonoBehaviour
     private EventManager eventManager;
     [SerializeField] private GameObject UIScript;
 
+    [SerializeField] private AudioSource mainAudio;
+    [SerializeField] private AudioClip canOpenAudio;
+
     void Start()
     {
         this.gameActivated = false;
@@ -108,9 +111,14 @@ public class SodaZone : MonoBehaviour
             //Progresses game if player who initiated it interacts
             else if (currentPlayer == other.gameObject.name && cooldownTimer <= 0)
             {
+                mainAudio.PlayOneShot(canOpenAudio);
                 cansDrunk++;
                 cooldownTimer = canCooldown;
                 var speed = speedBoostMultiplier * track.transform.localScale.y / 250;
+                if(speed < 1)
+                {
+                    speed = 1;
+                }
                 if(currentPlayer == "Player1")
                 {
                     player1.GetComponent<P1Controller>().changeSpeed(speed);

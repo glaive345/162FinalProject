@@ -26,6 +26,9 @@ public class LaserZone : MonoBehaviour
     private int numTargetRequired;
     [SerializeField] private GameObject UIScript;
 
+    [SerializeField] private AudioSource mainAudio;
+    [SerializeField] private AudioClip laserAudio;
+
     //ADD OTHER VARIABLES HERE
 
 
@@ -122,6 +125,7 @@ public class LaserZone : MonoBehaviour
                 //Playing Game
                 //ADD ON-INTERACT EFFECT HERE
                 this.createLaser();
+                mainAudio.PlayOneShot(laserAudio);
 
                 if (this.prevTime != 0)
                 {
