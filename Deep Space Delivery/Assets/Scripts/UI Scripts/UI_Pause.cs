@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UI_Pause : MonoBehaviour
 {
@@ -51,5 +52,10 @@ public class UI_Pause : MonoBehaviour
         {
             i.SetActive(false);
         }
+    }
+    public void Restart()
+    {
+        SceneManager.LoadScene("Main Scene");
+        hidePaused();
     }
 }
