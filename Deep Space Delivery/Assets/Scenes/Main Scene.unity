@@ -19943,6 +19943,10 @@ MonoBehaviour:
   barrelDrainMultiplier: 7.5
   fuelDrainMultiplier: 2.25
   mainEngineDrainMultiplier: 1.5
+  mainAudio: {fileID: 530768210}
+  putDownAudio: {fileID: 8300000, guid: ef64ce9d63124c94c9b64d7757131461, type: 3}
+  chargeAudio: {fileID: 8300000, guid: 1c1b8f833e3fe97478b4792c9e8cac58, type: 3}
+  chargeAudioDelay: 1.2
   mainActive: 0
   topActive: 0
   botActive: 0

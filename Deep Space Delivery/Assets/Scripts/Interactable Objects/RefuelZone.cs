@@ -28,6 +28,12 @@ public class RefuelZone : MonoBehaviour
     [SerializeField] private float fuelDrainMultiplier;
     [SerializeField] private float mainEngineDrainMultiplier;
 
+    [SerializeField] private AudioSource mainAudio;
+    [SerializeField] private AudioClip putDownAudio;
+    [SerializeField] private AudioClip chargeAudio;
+    [SerializeField] private float chargeAudioDelay;
+    private float chargeAudioTimer;
+
     public bool mainActive;
     public bool topActive;
     public bool botActive;
@@ -60,6 +66,8 @@ public class RefuelZone : MonoBehaviour
         mainActive = true;
         topActive = true;
         botActive = true;
+
+        chargeAudioTimer = 0;
 
         this.displayPanel.SetActive(false);
     }
@@ -105,6 +113,7 @@ public class RefuelZone : MonoBehaviour
         {
             barrel.SetActive(false);
             barrelCount++;
+            mainAudio.PlayOneShot(putDownAudio);
 
             this.updateDisplay();
         }
@@ -112,6 +121,8 @@ public class RefuelZone : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        chargeAudioTimer += Time.deltaTime;
+
         //If player1 or player 2 interacts
         if ((other.gameObject.name == "Player1" && Input.GetButtonDown("Utility1")) || (other.gameObject.name == "Player2" && Input.GetButtonDown("Utility2")))
         {
@@ -146,6 +157,11 @@ public class RefuelZone : MonoBehaviour
                 {
                     barrelCurrentFuel.transform.localScale = new Vector3(barrelCurrentFuel.transform.localScale.x, barrelCurrentFuel.transform.localScale.y - barrelDrainMultiplier * Time.deltaTime, barrelCurrentFuel.transform.localScale.z);
 
+                    if(chargeAudioTimer > chargeAudioDelay)
+                    {
+                        mainAudio.PlayOneShot(chargeAudio);
+                        chargeAudioTimer = 0;
+                    }
 
                     this.changeFuelLevel(fuelPointingTo, refuelRateMultiplier * Time.deltaTime);
                 }
