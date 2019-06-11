@@ -16,6 +16,7 @@ public class RadarZone : MonoBehaviour
     private Text nextScanText;
     private Text scansLeftText;
     private Text numberText;
+    private GameObject scansCompleted;
     private GameObject check;
     private GameObject cross;
     private GameObject nextScanBar;
@@ -24,7 +25,19 @@ public class RadarZone : MonoBehaviour
     private Material checkMaterial;
     private Material crossMaterial;
 
+    private float nextScanBarPos;
+
+    [SerializeField] private UnityEngine.UI.Text UIText;
+
     [SerializeField] private float nextScanTime;
+    private float nextScanTimer;
+    private int numberOfScansLeft;
+
+    [SerializeField] private int minSpawn;
+    [SerializeField] private int maxSpawn;
+    private int randomAmount;
+    private int numberGuessed;
+
     [SerializeField] private float currentScanTime;
     private float currentTimer;
 
@@ -44,17 +57,38 @@ public class RadarZone : MonoBehaviour
         nextScanBar = displayPanel.transform.GetChild(3).gameObject;
         scanTimeBar = displayPanel.transform.GetChild(7).gameObject;
         scanArea = displayPanel.transform.GetChild(1).gameObject;
-        checkMaterial = check.GetComponent<Renderer>().material;
-        crossMaterial = cross.GetComponent<Renderer>().material;
+        scansCompleted = displayPanel.transform.GetChild(11).gameObject;
+
+        nextScanBarPos = nextScanBar.transform.localPosition.x;
 
         currentTimer = 0;
+        numberOfScansLeft = 0;
+        nextScanTimer = 0;
+        randomAmount = 0;
+        numberGuessed = 0;
+
+        scansLeftText.text = "0";
 
         this.displayPanel.SetActive(false);
     }
 
     private void Update()
     {
-        
+        nextScanTimer += Time.deltaTime;
+        if(nextScanTimer >= nextScanTime)
+        {
+            if(numberOfScansLeft == 0)
+            {
+                this.createNewBoard();
+                scansCompleted.SetActive(false);
+            }
+            numberOfScansLeft++;
+            scansLeftText.text = numberOfScansLeft.ToString();
+            nextScanTimer = 0;
+        }
+
+        this.updateUI();
+        this.updateBars();
     }
 
 
@@ -62,13 +96,37 @@ public class RadarZone : MonoBehaviour
     {
         if (gameActivated)
         {
-            currentTimer += Time.deltaTime;
-            if(currentTimer > currentScanTime)
+            if(numberOfScansLeft > 0)
             {
-                //Checks if number matches
+                currentTimer += Time.deltaTime;
+                if (currentTimer > currentScanTime)
+                {
+                    if (numberGuessed == randomAmount)
+                    {
+                        check.SetActive(true);
+                        cross.SetActive(false);
+                        numberOfScansLeft--;
+                        scansLeftText.text = numberOfScansLeft.ToString();
+                        if (numberOfScansLeft == 0)
+                        {
+                            scansCompleted.SetActive(true);
+                        }
+                        this.updateUI();
+                    }
+                    else
+                    {
+                        check.SetActive(false);
+                        cross.SetActive(true);
+                    }
+                    this.createNewBoard();
 
-                currentTimer = 0;
+                    numberGuessed = 0;
+                    numberText.text = numberGuessed.ToString();
+
+                    currentTimer = 0;
+                }
             }
+            
         }
 
         //If player1 or player 2 interacts
@@ -79,10 +137,22 @@ public class RadarZone : MonoBehaviour
                 //Initializing Game
                 //INITIALIZE START STATE HERE
                 currentTimer = 0;
-                ChangeMaterialMode(checkMaterial, BlendMode.Fade);
-                ChangeMaterialMode(crossMaterial, BlendMode.Fade);
+                numberGuessed = 0;
+                numberText.text = numberGuessed.ToString();
+
+                if(numberOfScansLeft > 0)
+                {
+                    this.createNewBoard();
+                    scansCompleted.SetActive(false);
+                }
+                else
+                {
+                    scansCompleted.SetActive(true);
+                }
 
                 this.displayPanel.SetActive(true);
+                this.cross.SetActive(false);
+                this.check.SetActive(false);
 
                 //Setting Starting Player
                 this.gameActivated = true;
@@ -102,11 +172,8 @@ public class RadarZone : MonoBehaviour
             else if (currentPlayer == other.gameObject.name)
             {
                 //Playing Game
-                //ADD ON-INTERACT EFFECT HERE
-
-
-
-                //NEED TO SEND RESULTS TO SUBSCRIBERS
+                numberGuessed++;
+                numberText.text = numberGuessed.ToString();
             }
         }
     }
@@ -135,41 +202,58 @@ public class RadarZone : MonoBehaviour
 
     private void createScanObject()
     {
-        GameObject tempWindow = Instantiate(scanPrefab, this.displayPanel.transform.position, this.displayPanel.transform.rotation);
-        tempWindow.transform.SetParent(this.displayPanel.transform);
-        tempWindow.GetComponent<RectTransform>().localScale = new Vector3(5.0f, 5.0f, 5.0f);
-        tempWindow.transform.localPosition = new Vector3(Random.Range(-125, 125f), Random.Range(-65f, 65f), 0);
+        GameObject tempWindow = Instantiate(scanPrefab, this.scanArea.transform.position, this.scanArea.transform.rotation);
+        tempWindow.transform.SetParent(this.scanArea.transform);
+        tempWindow.GetComponent<RectTransform>().localScale = new Vector3(0.07272f, 0.13332f, 5.0f);
+        tempWindow.transform.localPosition = new Vector3(Random.Range(-.45f, .45f), Random.Range(-.45f, .45f), 0);
     }
 
-    //Code to change material mode (Adapted from: https://answers.unity.com/questions/1004666/change-material-rendering-mode-in-runtime.html)
-    private enum BlendMode
+    private void createNewBoard()
     {
-        Opaque,
-        Fade,
-    }
-
-    private void ChangeMaterialMode(Material standardShaderMaterial, BlendMode blendMode)
-    {
-        switch (blendMode)
+        //Removes old boards
+        for(int i = 0; i < randomAmount; i++)
         {
-            case BlendMode.Opaque:
-                standardShaderMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
-                standardShaderMaterial.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
-                standardShaderMaterial.SetInt("_ZWrite", 1);
-                standardShaderMaterial.DisableKeyword("_ALPHATEST_ON");
-                standardShaderMaterial.DisableKeyword("_ALPHABLEND_ON");
-                standardShaderMaterial.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-                standardShaderMaterial.renderQueue = -1;
-                break;
-            case BlendMode.Fade:
-                standardShaderMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-                standardShaderMaterial.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-                standardShaderMaterial.SetInt("_ZWrite", 0);
-                standardShaderMaterial.DisableKeyword("_ALPHATEST_ON");
-                standardShaderMaterial.EnableKeyword("_ALPHABLEND_ON");
-                standardShaderMaterial.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-                standardShaderMaterial.renderQueue = 3000;
-                break;
+            var firstChild = this.scanArea.transform.GetChild(i).gameObject;
+            Destroy(firstChild);
+            Debug.Log("Destroyed");
         }
+
+        //Creates new board
+        randomAmount = Random.Range(minSpawn, maxSpawn);
+        for(int i = 0; i < randomAmount; i++)
+        {
+            createScanObject();
+        }
+    }
+    
+
+    private void updateUI()
+    {
+        UIText.text = "Radar: " + numberOfScansLeft + " Scans";
+        if (numberOfScansLeft == 0)
+        {
+            UIText.color = new Color(0, 255, 0);
+            scansRequiredText.text = "Scans Completed";
+        }
+        else if (numberOfScansLeft > 0 && numberOfScansLeft < 4)
+        {
+            UIText.color = new Color(255, 255, 0);
+            scansRequiredText.text = "Scans Required";
+        }
+        else if (numberOfScansLeft >= 4)
+        {
+            UIText.color = new Color(255, 0, 0);
+            scansRequiredText.text = "Scans Required";
+        }
+    }
+
+    private void updateBars()
+    {
+        var nextScanPercent = nextScanTimer / nextScanTime;
+        var currentScanPercent = currentTimer / currentScanTime;
+
+        nextScanBar.transform.localScale = new Vector3(nextScanPercent * 200, nextScanBar.transform.localScale.y, nextScanBar.transform.localScale.z);
+        nextScanBar.transform.localPosition = new Vector3(nextScanBarPos + nextScanPercent * 100, nextScanBar.transform.localPosition.y, nextScanBar.transform.localPosition.z);
+        scanTimeBar.transform.localScale = new Vector3(currentScanPercent * 200, scanTimeBar.transform.localScale.y, scanTimeBar.transform.localScale.z);
     }
 }

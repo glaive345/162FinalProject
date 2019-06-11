@@ -39,7 +39,6 @@ public class BridgeZone : MonoBehaviour
     void Update()
     {
         this.throttle -= Time.deltaTime;
-        Debug.Log(throttle);
         if (this.throttle <= 0 && this.systemHealth > 0)
         {
             var randDamage = Random.Range(minSpawn, maxSpawn);
