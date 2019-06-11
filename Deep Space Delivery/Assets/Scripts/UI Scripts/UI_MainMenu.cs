@@ -16,7 +16,7 @@ public class UI_MainMenu : MonoBehaviour
 
     void Start()
     {
-        this.DirectionButton.onClick.AddListener(() => showDirection());
+        this.DirectionButton.onClick.AddListener(showDirection);
         this.CreditsButton.onClick.AddListener(showCredit);
         this.PlayButton.onClick.AddListener(play);
         this.BackButton.onClick.AddListener(back);
