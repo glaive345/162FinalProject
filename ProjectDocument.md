@@ -119,13 +119,12 @@ The story is that these guys are lowly space delivery men. They are not paid wel
 
 ## Press Kit and Trailer
 
-[Press Kit](https://github.com/aakim-git/PDFs/blob/master/Press%20Kit.pdf).
-[Trailer](https://youtu.be/24c4bITD9aY).
-
+[Press Kit](https://github.com/aakim-git/PDFs/blob/master/Press%20Kit.pdf)<br/>
+[Trailer](https://youtu.be/24c4bITD9aY)
 
 
 **Describe how you showcased your work. How did you choose what to show in the trailer? Why did you choose your screenshots?**
-
+Our Press Kit and Trailer highlights exciting gameplay, and iconic moments, like different minigames and even starting the game and viewing the main menu. 
 
 
 ## Game Feel
