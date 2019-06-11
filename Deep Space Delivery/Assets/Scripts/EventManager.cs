@@ -31,6 +31,7 @@ public class EventManager : MonoBehaviour
 
     private MyTuple[] eventList;
 
+    private List<int> currentEvents;
     private float TIMELIMIT = 10.0f;
 
     void Start()
@@ -49,6 +50,8 @@ public class EventManager : MonoBehaviour
         p2Controller = Player2.GetComponent<P2Controller>();
 
         AlertText = UIAlerts.transform.GetChild(1).GetComponent<Text>();
+
+        currentEvents = new List<int>();
     }
 
     // Update is called once per frame
@@ -65,6 +68,12 @@ public class EventManager : MonoBehaviour
     void eventAssignment()
     {
         int num = random.Next(0, 3);
+        while (this.currentEvents.Contains(num) == true)//while newEvent is in the current event
+        {
+            num = random.Next(0, 3);
+            this.currentEvents.Add(num);
+        }
+
         if (this.eventList[num].Item1 != true)
         {
             this.eventList[num].Item1 = true;
@@ -91,6 +100,7 @@ public class EventManager : MonoBehaviour
 
     void incrementTime()
     {
+        int count = 0;
         foreach (MyTuple i in this.eventList)
         {
             if (i.Item1 == true)
@@ -101,7 +111,9 @@ public class EventManager : MonoBehaviour
             {
                 i.Item1 = false;
                 //some failure statement
+                this.currentEvents.Remove(count);
             }
+            count++;
         }//close foreach
         return;
     }
@@ -111,12 +123,15 @@ public class EventManager : MonoBehaviour
         {
             case "laser":
                 this.eventList[0].Item1 = false;
+                this.currentEvents.Remove(0);
                 break;
             case "missile":
                 this.eventList[0].Item1 = false;
+                this.currentEvents.Remove(1);
                 break;
             case "soda":
                 this.eventList[0].Item1 = false;
+                this.currentEvents.Remove(2);
                 break;
         }
     }

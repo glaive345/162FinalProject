@@ -30883,11 +30883,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4737120948214586, guid: c4cbe6c492f2da347a243c5d939e654f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.4441714
+      value: 17.42
       objectReference: {fileID: 0}
     - target: {fileID: 4737120948214586, guid: c4cbe6c492f2da347a243c5d939e654f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -22.02656
+      value: -21.3
       objectReference: {fileID: 0}
     - target: {fileID: 4737120948214586, guid: c4cbe6c492f2da347a243c5d939e654f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -30924,6 +30924,18 @@ PrefabInstance:
     - target: {fileID: 4737120948214586, guid: c4cbe6c492f2da347a243c5d939e654f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4737120948214586, guid: c4cbe6c492f2da347a243c5d939e654f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.231534
+      objectReference: {fileID: 0}
+    - target: {fileID: 4737120948214586, guid: c4cbe6c492f2da347a243c5d939e654f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.190152
+      objectReference: {fileID: 0}
+    - target: {fileID: 4737120948214586, guid: c4cbe6c492f2da347a243c5d939e654f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.342
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c4cbe6c492f2da347a243c5d939e654f, type: 3}
@@ -31757,9 +31769,9 @@ MonoBehaviour:
   laserZoneMG: {fileID: 1693822873}
   missileZoneMG: {fileID: 891010014}
   sodaZoneMG: {fileID: 2046422600}
-  Player1: {fileID: 0}
-  Player2: {fileID: 0}
-  UIAlerts: {fileID: 0}
+  Player1: {fileID: 2109387057}
+  Player2: {fileID: 2062510015}
+  UIAlerts: {fileID: 1133811877}
 --- !u!114 &1432694995
 MonoBehaviour:
   m_ObjectHideFlags: 0
