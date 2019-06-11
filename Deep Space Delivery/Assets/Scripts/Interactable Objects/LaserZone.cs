@@ -10,6 +10,7 @@ public class LaserZone : MonoBehaviour
     [SerializeField] private GameObject gun;
     [SerializeField] private GameObject coolDownBar;
     [SerializeField] private GameObject laserFire;
+    [SerializeField] private float coolDownRate;
     private bool startTimer;
     private float laserPropTimer;
     [SerializeField] private float laserLifetime;
@@ -21,7 +22,7 @@ public class LaserZone : MonoBehaviour
     private bool gameActivated;
     private string currentPlayer;
     private bool gameInitiated;
-    private float heat;
+    public float heat;
     private float prevTime;
     private bool coolingDown;
 
@@ -77,7 +78,11 @@ public class LaserZone : MonoBehaviour
 
         if (this.heat > 0)
         {
-            this.heat -= Time.deltaTime * 10;
+            this.heat -= Time.deltaTime * coolDownRate;
+        }
+        else
+        {
+            this.heat = 0;
         }
 
         if (this.heat < 60)
@@ -86,13 +91,6 @@ public class LaserZone : MonoBehaviour
         }
 
         this.coolDownBar.transform.localScale = new Vector3(3 * this.heat, 10, 1);
-        // dtime -= Time.deltaTime;
-        // if (this.gameActivated && this.remainingTargets > 0 && this.dtime <= 0)
-        // {
-        //     this.createTarget();
-        //     this.dtime = Random.Range(0.0f, 1.0f);
-        //     this.remainingTargets--;
-        // }
     }
 
     private void OnTriggerStay(Collider other)
