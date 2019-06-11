@@ -8,8 +8,8 @@ public class ShieldBarManager : MonoBehaviour
     [SerializeField] private float naturalDecay;
 
     private float currentChangePercent;
-    [SerializeField] private float maxShield;
-    [SerializeField] private Vector3 shieldCenter;
+    private float maxShield;
+    private Vector3 shieldCenter;
 
     // Start is called before the first frame update
     void Start()
