@@ -5,6 +5,7 @@ using UnityEngine;
 public class RefuelZone : MonoBehaviour
 {
     [SerializeField] private GameObject displayPanel;
+    [SerializeField] private UnityEngine.UI.Text UIText;
 
     private bool gameActivated;
     private string currentPlayer;
@@ -280,6 +281,32 @@ public class RefuelZone : MonoBehaviour
                     botActive = false;
                 }
                 break;
+        }
+        var currentlyActive = 0;
+        if (mainActive)
+        {
+            currentlyActive++;
+        }
+        if (topActive)
+        {
+            currentlyActive++;
+        }
+        if (botActive)
+        {
+            currentlyActive++;
+        }
+        UIText.text = "Engines: (" + currentlyActive.ToString() + "/3)";
+        if(currentlyActive == 3)
+        {
+            UIText.color = new Color(0, 255, 0);
+        }
+        else if(currentlyActive > 0 && currentlyActive < 3)
+        {
+            UIText.color = new Color(255, 255, 0);
+        }
+        else if (currentlyActive == 0 )
+        {
+            UIText.color = new Color(255, 0, 0);
         }
     }
 }

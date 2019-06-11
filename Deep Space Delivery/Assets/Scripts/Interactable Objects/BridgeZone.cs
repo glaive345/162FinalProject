@@ -11,6 +11,9 @@ public class BridgeZone : MonoBehaviour
     [SerializeField] private GameObject warningWindowPrefab;
 
     [SerializeField] private float throttleReset;
+    [SerializeField] private int minSpawn;
+    [SerializeField] private int maxSpawn;
+    [SerializeField] private UnityEngine.UI.Text UIText;
 
     private bool gameActivated;
     private string currentPlayer;
@@ -36,19 +39,28 @@ public class BridgeZone : MonoBehaviour
     void Update()
     {
         this.throttle -= Time.deltaTime;
+        Debug.Log(throttle);
         if (this.throttle <= 0 && this.systemHealth > 0)
         {
-            var randDamage = Random.Range(1, 5);
-            if (this.gameActivated)
+            var randDamage = Random.Range(minSpawn, maxSpawn);
+            for (var i = 0; i < randDamage; i++)
             {
-                for (var i = 0; i < randDamage; i++)
-                {
-                    this.createWindow();
-                    this.remainingWindows++;
-                }
+                this.createWindow();
+                this.remainingWindows++;
             }
             this.systemHealth -= randDamage;
             this.throttle = throttleReset;
+        }
+        if(remainingWindows > 0)
+        {
+            UIText.text = "Bridge: " + remainingWindows + " Errors";
+            UIText.color = new Color(255, 0, 0);
+
+        }
+        else
+        {
+            UIText.text = "Bridge: Good";
+            UIText.color = new Color(0, 255, 0);
         }
     }
 

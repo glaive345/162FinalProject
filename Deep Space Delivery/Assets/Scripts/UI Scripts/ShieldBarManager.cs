@@ -7,6 +7,8 @@ public class ShieldBarManager : MonoBehaviour
     [SerializeField] private GameObject shieldBar;
     [SerializeField] private float naturalDecay;
 
+    [SerializeField] private UnityEngine.UI.Text UIText;
+
     private float currentChangePercent;
     private float maxShield;
     private Vector3 shieldCenter;
@@ -50,10 +52,14 @@ public class ShieldBarManager : MonoBehaviour
         if(shieldBar.transform.localScale.x > 10)
         {
             shieldActive = true;
+            UIText.text = "Shields: Online";
+            UIText.color = new Color(0, 255, 0);
         }
         else
         {
             shieldActive = false;
+            UIText.text = "Shields: Offline";
+            UIText.color = new Color(255, 0, 0);
         }
     }
 

@@ -61,10 +61,12 @@ public class SodaZone : MonoBehaviour
         if(cooldownTimer > 0)
         {
             UIVendingText.text = "Vending Machine: Not Ready";
+            UIVendingText.color = new Color(255, 0, 0);
         }
         else
         {
             UIVendingText.text = "Vending Machine: Ready";
+            UIVendingText.color = new Color(0, 255, 0);
         }
     }
 
