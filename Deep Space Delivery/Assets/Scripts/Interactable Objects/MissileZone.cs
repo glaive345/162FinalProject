@@ -73,8 +73,8 @@ public class MissileZone : MonoBehaviour
         this.displayPanel.SetActive(false);
 
         eventManager = UIScript.GetComponent<EventManager>();
-        astStartPosition = new Vector3(40, 4, 10);
-        astEndPosition = new Vector3(25, 4, 10);
+        astStartPosition = new Vector3(40, -8, 10);
+        astEndPosition = new Vector3(22, -8, 10);
         TimeElapsed = 0;
     }
 
@@ -108,9 +108,16 @@ public class MissileZone : MonoBehaviour
         // Update Asteroid:
         if (eventActivated)
         {
-            this.TimeElapsed += Time.deltaTime;
+            this.TimeElapsed += Time.deltaTime * .5f;
             Asteroid.transform.position = Vector3.Lerp(astStartPosition, astEndPosition, this.TimeElapsed/this.astSpeed);
             Asteroid.transform.Rotate(2, 2, 2, Space.Self);
+            if(Asteroid.transform.position.x == astEndPosition.x)
+            {
+                DestroyAsteroid();
+                UIScript.GetComponent<DamageManager>().takeDamage(35);
+                this.eventActivated = false;
+                this.eventManager.returnFunction("missile");
+            }
         }
     }
 
@@ -329,7 +336,7 @@ public class MissileZone : MonoBehaviour
         this.AsteroidExplosion.transform.position = this.Asteroid.transform.position;
         this.AsteroidExplosion.Play();
         this.Asteroid.transform.position = this.astStartPosition;
-        this.Asteroid.transform.gameObject.SetActive(false);
+        Destroy(this.Asteroid.gameObject);
     }
     
 }

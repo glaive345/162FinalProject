@@ -113,7 +113,7 @@ public class UI_Speed : MonoBehaviour
             //If overshot
             if(currentEngineThrust < currentMaxSpeedMultiplier * currentEngineThrustExternal)
             {
-                currentEngineThrust = currentMaxSpeedMultiplier;
+                currentEngineThrust = currentMaxSpeedMultiplier * currentEngineThrustExternal;
             }
         }
         //If below current max speed
@@ -123,7 +123,7 @@ public class UI_Speed : MonoBehaviour
             //If overshot
             if (currentEngineThrust > currentMaxSpeedMultiplier * currentEngineThrustExternal)
             {
-                currentEngineThrust = currentMaxSpeedMultiplier;
+                currentEngineThrust = currentMaxSpeedMultiplier * currentEngineThrustExternal;
             }
         }
 
